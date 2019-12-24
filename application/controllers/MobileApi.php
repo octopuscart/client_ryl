@@ -60,15 +60,15 @@ class MobileApi extends REST_Controller {
 
     function faq_get() {
         $this->config->load('rest', TRUE);
-        $temp = array("Will you keep a record of my order? " => "Yes, we will keep a record of your online order with all the details. In addition, we will keep your individual paper pattern. ",
+        $temp = array(
+            "What does ‘bespoke’ mean?" => "The word bespoke means made-to-order or custom-made. It is most known for its centuries-old relationship with tailor-made suits.",
+            "What if my order doesn’t fit to my satisfaction?" => "Please contact us and we will do everything possible to handle the case and make you happy with your purchase.",
             "Once I complete the order online, how long does it take to deliver? " => "We will email your order confirmation within 24 hours with expected delivered date. We anticipate delivering all orders within 12-14 days of confirmation.",
             "Can you ship my order internationally? " => "Yes, we can ship orders to anywhere in the world. Delivery times vary by region.",
-            "What is your return policy?" => "Upon inspection, if Bespoke Tailors made an error, we will then make arrangements to receive back the order and have it corrected or redone.",
+            "What is your return policy?" => "Upon inspection, if we made an error, we will then make arrangements to receive back the order and have it corrected or redone.",
+            "Will you keep a record of my order? " => "Yes, we will keep a record of your online order with all the details. In addition, we will keep your individual paper pattern. ",
             "What if I made a mistake in my order, can I fix it? " => "Yes, send us an email immediately and we will rectify the error.",
-            "Do you ship the orders door-to-door?" => "Yes, we ship orders door-to-door via UPS, Fedex, DHL or EMS Speedpost",
-            "What if my order doesn’t fit to my satisfaction?" => "Please contact us and we will do everything possible to handle the case and make you happy with your purchase.",
             "Can I send you a garment that fits perfectly to copy the measurements?" => "Yes, of course! That will help us to create perfect fit clothing for you.",
-            "What does ‘bespoke’ mean?" => "The word bespoke means made-to-order or custom-made. It is most known for its centuries-old relationship with tailor-made suits.",
             "Are the buttons on jacket sleeves working or artificial?" => "We construct all jackets with working buttons."
         );
         $this->response($temp);
@@ -76,8 +76,10 @@ class MobileApi extends REST_Controller {
 
     function catalogue_get() {
         $this->config->load('rest', TRUE);
-        $catlist = ['01_Anteprima_FW_2018_19.jpg', '02_Anteprima_FW_2018_19.jpg', '03_Anteprima_FW_2018_19.jpg', '04_Anteprima_FW_2018_19.jpg', '05_Anteprima_FW_2018_19.jpg', '06_Anteprima_FW_2018_19.jpg', '07_Anteprima_FW_2018_19.jpg', '08_Anteprima_FW_2018_19.jpg', '09_Anteprima_FW_2018_19.jpg', '10_Anteprima_FW_2018_19.jpg', '11_Anteprima_FW_2018_19.jpg', '12_Anteprima_FW_2018_19.jpg', '13_Anteprima_FW_2018_19.jpg', '14_Anteprima_FW_2018_19.jpg', '15_Anteprima_FW_2018_19.jpg', '16_Anteprima_FW_2018_19.jpg', '17_Anteprima_FW_2018_19.jpg', '18_Anteprima_FW_2018_19.jpg', '19_Anteprima_FW_2018_19.jpg', '20_Anteprima_FW_2018_19.jpg', '21_Anteprima_FW_2018_19.jpg', '22_Anteprima_FW_2018_19.jpg', '23_Anteprima_FW_2018_19.jpg', '24_Anteprima_FW_2018_19.jpg', '25_Anteprima_FW_2018_19.jpg', '26_Anteprima_FW_2018_19.jpg', '27_Anteprima_FW_2018_19.jpg', '28_Anteprima_FW_2018_19.jpg', '29_Anteprima_FW_2018_19.jpg', '30_Anteprima_FW_2018_19.jpg', '31_Anteprima_FW_2018_19.jpg', '32_Anteprima_FW_2018_19.jpg', '33_Anteprima_FW_2018_19.jpg', '34_Anteprima_FW_2018_19.jpg', '35_Anteprima_FW_2018_19.jpg', '36_Anteprima_FW_2018_19.jpg', '37_Anteprima_FW_2018_19.jpg', '38_Anteprima_FW_2018_19.jpg', '39_Anteprima_FW_2018_19.jpg'];
-
+        $catlist = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+            1, 2, 3, 4, 5, 6, 7, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+            24, 25, 26, 27, 28, 29
+        ];
         $this->response($catlist);
     }
 

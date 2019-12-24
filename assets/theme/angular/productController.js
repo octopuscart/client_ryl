@@ -3,6 +3,13 @@
  */
 
 App.controller('ProductController', function ($scope, $http, $timeout, $interval) {
+    
+    
+      $(".Bubble__BubbleComponent-sc-83hmjh-2").click(function(){
+          console.log("sfsdf")
+              $(".eapps-widget-show-toolbar a[role='button']").next().find("a").remove();
+        })
+    
 
     $scope.productResults = {};
     $scope.init = 0;
