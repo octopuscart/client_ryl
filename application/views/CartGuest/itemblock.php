@@ -12,7 +12,7 @@
                             <i class="ion-bag fa-stack-1x "></i>
                         </span>   My Shopping Bag
                         <span style="float: right; line-height: 29px;color: black;
-    font-weight: bold;" class="ng-binding">Total: {{globleCartData.total_price|currency:"<?php echo globle_currency; ?>"}} ({{globleCartData.total_quantity}})</span> 
+    font-weight: bold;" class="ng-binding">Total: {{globleCartData.total_price | currency:"<?php echo globle_currency; ?>"}} ({{globleCartData.total_quantity}})</span> 
                     </a>
                     <?php
                 }

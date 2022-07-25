@@ -32,7 +32,7 @@ class Shop extends CI_Controller {
         $this->db->order_by("id", "desc");
         $this->db->limit(3);
         $query = $this->db->get();
-        $stylebook = $query->result_array();
+        $stylebook =   $query ? $query->result_array():[];
 
 
         $data['stylebook'] = $stylebook;

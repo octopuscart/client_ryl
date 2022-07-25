@@ -633,12 +633,13 @@ where pa.product_id in ($productatrvalue) group by attribute_value_id";
          $this->db->order_by("display_index");
         $query = $this->db->get('category');
         
-        $category = $query->result_array();
+        
         $container = [];
-        foreach ($category as $ckey => $cvalue) {
+		if($query){$category = $query->result_array();        foreach ($category as $ckey => $cvalue) {
             $cvalue['sub_category'] = $this->productListCategories($cvalue['id']);
             array_push($container, $cvalue);
         }
+		}
         return $container;
     }
 
