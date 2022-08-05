@@ -38,7 +38,7 @@ $this->load->view('layout/header');
                             <li class="grid-sizer"></li><!-- for Masonry column width -->
 
                             <?php
-                            foreach ($stylearray as $key => $value) {
+                            foreach ($lookbook as $key => $value) {
                                 ?>    
 
                                 <li style="    padding: 10px;" >
@@ -46,9 +46,9 @@ $this->load->view('layout/header');
                                     <div class="panel panel-default" style="border:none;margin: 0px;">
                                         <div class="panel-body" style="    padding: 5px;">
                                             <div class="thumbnail lookbook_thumb" >
-                                                <img src="<?php echo base_url(); ?>assets/lookbook/<?php echo $value['image']; ?>" alt="img01" style=""/>
+                                                <img src="<?php echo ADMINURL; ?>assets/look_books/<?php echo $value['look_book_image']; ?>" alt="img01" style=""/>
                                                 <div class="caption">
-                                                    <p>Style#: <?php echo $value['style_no'];?></p>
+                                                    <p>Style#: <?php echo $value['look_book_title'];?></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -65,12 +65,15 @@ $this->load->view('layout/header');
                         <ul>
 
                             <?php
-                            foreach ($stylearray as $key => $value) {
+                            foreach ($lookbook as $key => $value) {
                                 ?>    
                                 <li >
 
                                     <div class="thumbnail " style="background: none;border:none">
-                                        <center>  <img src="<?php echo base_url(); ?>assets/lookbook/<?php echo $value['image']; ?>" alt="img01"  style="    height:550px;"/></center>
+                                        <center>  
+                                        <img src="<?php echo ADMINURL; ?>assets/look_books/<?php echo $value['look_book_image']; ?>" alt="img01"  style="    height:550px;"/>
+
+                                        </center>
 
                                     </div>
 

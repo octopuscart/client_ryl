@@ -55,7 +55,7 @@
             <div class="col-md-3">
                 <h4>Information</h4>
                 <ul class="links-footer">
-                    <li><a href="<?php echo site_url("Shop/stylingTips"); ?>">Our Blog</a></li>
+                    <li><a href="<?php echo site_url("Shop/offers"); ?>">Our Offers</a></li>
                     <li><a href="<?php echo site_url("Shop/aboutus"); ?>">About Us</a></li>
                     <li><a href="<?php echo site_url("Shop/lookbook"); ?>">Look Book</a></li>
                     <li><a href="<?php echo site_url("Shop/appointment"); ?>">Appointment</a></li>
