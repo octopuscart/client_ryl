@@ -1,12 +1,6 @@
 <?php
 $this->load->view('layout/header');
 ?>
-<style>
-    .profile-image {
-        width: 182px ;
-        height: 182px;
-    }
-</style>
 
 <section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
     <div class="position-center-center">
@@ -24,11 +18,15 @@ $this->load->view('layout/header');
 
 
 
+
+
+
+
 <!-- Content -->
 <div id="content" class="my-account-page-area"> 
 
     <!-- Blog -->
-    <section class="woocommerce mb-5">
+    <section class="woocommerce ">
         <div class="container"> 
 
             <!-- News Post -->
@@ -40,7 +38,7 @@ $this->load->view('layout/header');
                     ?>
 
 
-                    <div class="col-md-9 checkout-form row">
+                    <div class="col-md-9 checkout-form">
                         <?php
                         if ($msg) {
                             ?>
@@ -53,19 +51,9 @@ $this->load->view('layout/header');
                             <?php
                         }
                         ?>
-                        <div class="col-md-3">
-                            <div class="profile-image" style="background: url(<?php echo ADMINURL; ?>assets/emoji/user.png); background-size: cover;margin-top:150px;">
-                                <?php
-                                if ($user_details->image) {
-                                    ?>
-                                    <img src='<?php echo ADMINURL; ?>assets/profile_image/<?php echo $user_details->image; ?>' style="width: 100%;   height: auto;" />
-                                    <?php
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <div class="col-md-6">  
-                            <h6><?php echo $user_details->email; ?> <small>Email (For Login)</small> </h6><br/>
+
+                        <div class=" woocommerce-MyAccount-content">  
+                            <h6><?php echo $user_details->email; ?> <small>Email (For Login)</small> </h6>
                             <div class="woocommerce-MyAccount-content "> 
                                 <header class="row woocommerce-Address-title title">
                                     <h3 class="col-xs-12 metro-title">ACCESS YOUR ACCOUNT</h3>
@@ -74,56 +62,56 @@ $this->load->view('layout/header');
                                 <form class="create_account_form row woocommerce-EditAccountForm edit-account" method="post" action="#">
                                     <input type="hidden" name="user_id" value="45">
                                     <ul class="row">
-                                        <div class="col-md-6 col-xs-12">
+                                        <li class="col-sm-6 woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
                                             <label>
-                                                First Name    </label>
-                                            <input type="text" name="first_name" class="form-control"  value="<?php echo $user_details->first_name; ?>">
-
-                                        </div>
-                                        <div class="col-md-6 col-xs-12">
-
-                                            <label>
-                                                Last Name    </label>
-                                            <input type="text" name="last_name" class="form-control"  value="<?php echo $user_details->last_name; ?>">
-
-                                        </div>
-
-
-                                        <div class="col-md-6 col-xs-12">
+                                                First Name
+                                                <input type="text" name="first_name" class="woocommerce-Input woocommerce-Input--text input-text"  value="<?php echo $user_details->first_name; ?>">
+                                            </label>
+                                        </li>
+                                        <li class="col-sm-6 woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
 
                                             <label>
-                                                Contact No.    </label>
-                                            <input type="text" name="contact_no" class="form-control"  value="<?php echo $user_details->contact_no; ?>">
+                                                Last Name
+                                                <input type="text" name="last_name" class="woocommerce-Input woocommerce-Input--text input-text"  value="<?php echo $user_details->last_name; ?>">
+                                            </label>
+                                        </li>
 
-                                        </div>
 
-
-
-                                        <div class="col-md-6 col-xs-12">
-
-                                            <label>
-                                                Gender    </label> 
-                                            <select name="gender" class="form-control" style="    background: #f5f5f5;
-                                                    height: 45px;
-                                                    font-size: 12px;
-                                                    line-height: 50px;
-                                                    border: none;
-                                                    color: #000;
-                                                    width: 100%;
-                                                    padding: 0 25px;border-radius: 0;">
-                                                <option  value="Male" <?php echo $user_details->gender == 'Male' ? "selected" : ""; ?>>Male</option>
-                                                <option  value="Female" <?php echo $user_details->gender == 'Female' ? "selected" : ""; ?>>Female</option>
-                                            </select>
-
-                                        </div>
-
-                                        <div class="col-md-6 col-xs-12">
+                                        <li class="col-sm-6 woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
 
                                             <label>
-                                                Date of Birth   </label>
-                                            <input type="date" class="form-control" name="birth_date"  value="<?php echo $user_details->birth_date; ?>">
+                                                Contact No.
+                                                <input type="text" name="contact_no" class="woocommerce-Input woocommerce-Input--text input-text"  value="<?php echo $user_details->contact_no; ?>">
+                                            </label>
+                                        </li>
 
-                                        </div>
+
+
+                                        <li class="col-sm-6 woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
+
+                                            <label>
+                                                Gender
+                                                <select name="gender" class="form-control" style="    background: #f5f5f5;
+                                                        height: 45px;
+                                                        font-size: 12px;
+                                                        line-height: 50px;
+                                                        border: none;
+                                                        color: #000;
+                                                        width: 100%;
+                                                        padding: 0 25px;border-radius: 0;">
+                                                    <option  value="Male" <?php echo $user_details->gender == 'Male' ? "selected" : ""; ?>>Male</option>
+                                                    <option  value="Female" <?php echo $user_details->gender == 'Female' ? "selected" : ""; ?>>Female</option>
+                                                </select>
+                                            </label> 
+                                        </li>
+
+<!--                                        <li class="col-sm-6 woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
+
+                                            <label>
+                                                Date of Birth
+                                                <input type="date" class="woocommerce-Input woocommerce-Input--text input-text" name="birth_date"  value="<?php echo $user_details->birth_date; ?>">
+                                            </label>
+                                        </li>-->
 
 
                                         <li class="col-sm-12" style="padding-top: 20px;">
@@ -191,25 +179,24 @@ $this->load->view('layout/header');
                     <form action="#" method="post">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel" style="font-size: 15px">Change Password</h4>
-
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel" style="font-size: 15px">Change Password</h4>
                             </div>
                             <div class="modal-body checkout-form ">
 
                                 <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
                                     Old Password
-                                    <input type="text" name="old_password"  value="" class=" form-control">
+                                    <input type="text" name="old_password"  value="" class=" woocommerce-Input woocommerce-Input--text input-text">
                                 </label>
 
                                 <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
                                     New Password
-                                    <input type="text" name="new_password"  value="" class=" form-control">
+                                    <input type="text" name="new_password"  value="" class=" woocommerce-Input woocommerce-Input--text input-text">
                                 </label>
                                 <br/>
                                 <label class="woocommerce-form-row woocommerce-form-row--last form-row form-row-last">
                                     Confirm Password
-                                    <input type="text" name="re_password"  value="" class=" form-control">
+                                    <input type="text" name="re_password"  value="" class=" woocommerce-Input woocommerce-Input--text input-text">
                                 </label>
                             </div>
                             <div class="modal-footer">

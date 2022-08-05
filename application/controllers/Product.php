@@ -8,7 +8,8 @@ class Product extends CI_Controller {
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->library('session');
-        $this->user_id = $this->session->userdata('logged_in')['login_id'];
+        $this->user_obj = $this->session->userdata('logged_in');
+        $this->user_id = $this->user_obj ? $this->user_obj['login_id'] : 0;
     }
 
     public function index() {
@@ -38,6 +39,15 @@ class Product extends CI_Controller {
         $data["custom_id"] = $custom_id;
         $data["item_price"] = $customeitem->price;
         $data["cattempid"] = $cattempid;
+        
+                $categories = $this->Product_model->productListCategories($cat_id, $custom_id);
+        $data["categorie_parent"] = $this->Product_model->getparent($cat_id);
+        $data["categories"] = $categories;
+        $data["category"] = $cat_id;
+        $data["custom_item"] = $customeitem->item_name;
+        $data["custom_id"] = $custom_id;
+        $data["item_price"] = $customeitem->price;
+        $data["appliedFilter"] = isset($_GET["filter"]) ? $_GET["filter"] : "Related";
 
         $this->load->view('Product/productList', $data);
     }

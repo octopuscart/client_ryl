@@ -26,16 +26,15 @@ $this->load->view('layout/header');
     }
 </style>
 
-
 <section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
     <div class="position-center-center">
         <div class="container">
-            <h4>My Orders</h4>
+            <h4>My Profile</h4>
 
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li class="active">Profile</li>
+                <li class="active">Account</li>
             </ol>
         </div>
     </div>
@@ -59,37 +58,37 @@ $this->load->view('layout/header');
                     ?>
 
 
-                    <div class="col-md-9 mb-5" style=''>
+                    <div class="col-md-9">
                         <?php
                         foreach ($orderslist as $key => $value) {
                             ?>
-                            <div class="row  " > 
+                            <div class="row  "> 
+                                <div class="pricing">
 
+                                    <article class="order_box" style="padding: 10px">
+                                        <div class="col-md-12">
+                                            <h6>
+                                                Order No. #<?php echo $value->order_no; ?>
+                                                <span style="float: right;margin: 0px">
+                                                    <i class="fa fa-calendar"></i><?php echo $value->order_date; ?>  <?php echo $value->order_time; ?>
+                                                </span>
+                                            </h6>
+                                        </div>
+                                        <div class="col-md-4">
+                                            Total Amount: {{<?php echo $value->total_price; ?>|currency:"<?php echo globle_currency; ?> "}}
+                                            <br/>
+                                            Total Products: {{<?php echo $value->total_quantity; ?>}}
+                                        </div>
+                                        <div class="col-md-4">
+                                            Status: <?php echo $value->status; ?>
 
-                                <article class="row" style="padding: 10px">
-                                    <div class="col-md-12">
-                                        <h6>
-                                            Order No. #<?php echo $value->order_no; ?>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="<?php echo site_url('order/orderdetails/' . $value->order_key); ?>" class="btn btn-inverse btn-small" style="margin: 0px;    float: right;">View Order</a>
+                                        </div>
+                                    </article>
 
-                                        </h6>
-                                    </div>
-                                    <div class="col-md-4">
-                                        Total Amount: {{<?php echo $value->total_price; ?>|currency:"<?php echo globle_currency; ?> "}}
-                                        <br/>
-                                        Total Products: {{<?php echo $value->total_quantity; ?>}}
-                                    </div>
-                                    <div class="col-md-4">
-                                        Status: <?php echo $value->status; ?><br/>
-                                        <span style="margin: 0px">
-                                            <i class="fa fa-calendar"></i> <?php echo $value->order_date; ?>  <?php echo $value->order_time; ?>
-                                        </span>
-                                    </div>
-                                    <div class="col-md-4 text-center">
-                                        <a href="<?php echo site_url('order/orderdetails/' . $value->order_key); ?>" class="btn btn-warning" style="margin: 0px;    ;">View Order</a>
-
-                                    </div>
-                                </article>
-
+                                </div>
                             </div>
                             <?php
                         }

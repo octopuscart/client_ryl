@@ -5,10 +5,11 @@ require("configdbconnect.php");
 $configuration = $globleConnectDB;
 
 $baselink = 'http://' . $_SERVER['SERVER_NAME'];
-
+$adminurl = "https://admin.royaltailor.hk/";
 $baselink = 'http://' . $_SERVER['SERVER_NAME'];
 switch ($baselink) {
     case "http://localhost":
+        $adminurl = "http://localhost/tailoradminv3/";
         $baselinkmain = $baselink . $configuration['localpath'];
         break;
     case "http://192.168.1.2":
@@ -17,6 +18,7 @@ switch ($baselink) {
     default:
         $baselinkmain = $configuration['site_url'];
 }
+
 
 define('imageserver', $baselinkmain . "assets_main/productimages/");
 define('imageserverslider', $baselinkmain . "assets_main/sliderimages/");
@@ -54,6 +56,7 @@ define('ORDER_PREFIX', $globleConnectCartCheckout['order_prefix']);
 define('PRODUCT_PATH_PRE', $globleConnectCartCheckout['product_path_pre']);
 define('PRODUCT_PATH_POST', $globleConnectCartCheckout['product_path_post']);
 
+define('ADMINURL', $adminurl);
 
 
 

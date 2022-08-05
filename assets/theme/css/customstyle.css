@@ -3,7 +3,12 @@
 .btn{
     background: #D1913C;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.btn-default{
+     background: #fff;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fff, #fff);  /* Chrome 10-25, Safari 5.1-6 */
 
 }
 
@@ -310,7 +315,7 @@ footer {
     left: 0px;
     height: 100%;
     width: 100%;
-    background: rgba(240, 171, 20, 0.29);
+    background: rgb(0 0 0 / 29%);
     opacity: 0;
 }
 
@@ -434,8 +439,8 @@ header .is-sticky .sticky .navbar li a {
 }
 
 .custome_summary_popup th{
-    text-align: right;
-    text-align: right;
+/*    text-align: right;
+    text-align: right;*/
     padding-right: 12px;
     width: 50%;
     padding: 5px;
@@ -525,8 +530,8 @@ header .is-sticky .sticky .navbar li a {
 
 
 .shop-content .col-md-9 .shop-artical .btn {
-    left: 20px;
-    padding: 10px 5px;
+/*    left: 20px;
+    padding: 10px 5px;*/
 }
 .shop-content .col-md-9 .shop-artical .by {
     left: auto;
@@ -595,4 +600,88 @@ span.badge {
     font-weight: 700;
     font-size: 14px;
     display: inline-block;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #b28c06;
+    border-color: #b28c06;
+}
+
+.list-group-item.active a, .list-group-item.active:focus a, .list-group-item.active:hover a {
+  
+    color: #fff;
+    
+}
+
+.shop-artical2{
+     margin-bottom: 20px;
+     
+}
+
+.shop-artical2 .btn{
+    padding:10px;
+    border-color: #d99c4b;
+   
+}
+
+.shop-content .info a {
+    font-weight: 600;
+    color: #000;
+    font-size: 16px;
+    margin-top: 14px;
+    width: 100%;
+    display: block;
+}
+
+.shop-artical2 {
+    margin-bottom: 20px;
+    border: 1px solid #e5ad62;
+    text-align: center;
+}
+
+.shop-content .info .price {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.shop-artical2 img{
+    margin-bottom: 15px;
+}
+
+.shop-content .info {
+    text-align: center;
+    background: #e9e9e9;
+}
+
+.btn-small-xs {
+    padding: 5px!important;
+    line-height: normal;
+}
+
+.btn-small-sm {
+    padding: 15px!important;
+    line-height: normal;
+}
+
+#previouseStyles h3 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    color: #fff;
+    text-decoration: none;
+    background-color: #d6a600;
+    outline: 0;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050000;
 }

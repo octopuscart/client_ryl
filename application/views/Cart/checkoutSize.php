@@ -14,13 +14,16 @@ $this->load->view('layout/header');
 
 
 
-    .measurement_text{font-size: 20px;
-                      float: left;    font-family: sans-serif;
+    .measurement_text{
+        font-size: 20px;
+        float: left;
+        font-family: sans-serif;
     }
     .fr_value{
         font-size: 15px;
         margin-top: -7px;
-        float: left;    font-family: sans-serif;
+        float: left;
+        font-family: sans-serif;
     }
 
     .cartbutton{
@@ -168,15 +171,77 @@ $this->load->view('layout/header');
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <ul>
-                                            <li class="active"><a href="#size_standard" data-toggle="tab" aria-expanded="false" ng-click="slidedemostandard()">Standard Size</a></li>
-                                            <li><a href="#bank" data-toggle="tab" aria-expanded="true" ng-click="slidedemo('Custom Measurement')">Measure Your Body</a></li>
-                                            <li><a href="#cash" data-toggle="tab" aria-expanded="false" ng-click="slidedemo('Mail-in Garments')">Mail-in Garments</a></li>
-                                            <li><a href="#cheque" data-toggle="tab" aria-expanded="false" ng-click="slidedemo('Recent Measurement')">For Existing Clients</a></li>
+                                            <?php
+                                            if ($has_user) {
+                                                ?>
+                                                <li role="presentation" class=" active">
+                                                    <a href="#previouseStyles" class="active" data-toggle="tab" role="tab" ng-click="slidedemo('Previouse Measurement')">Select From Previous</a>
+                                                </li>
+                                                <?php
+                                            }
+                                            ?>
+                                            <li  role="presentation" class=" <?php echo $has_user ? '' : 'active'; ?>">
+                                                <a href="#size_standard" data-toggle="tab" class=" <?php echo $has_user ? '' : 'active'; ?>" role="tab" ng-click="slidedemostandard()">Standard Size</a>
+                                            </li>
+                                            <li><a href="#bank" data-toggle="tab" role="tab" ng-click="slidedemo('Custom Measurement')">Measure Your Body</a></li>
+                                            <li><a href="#cash" data-toggle="tab"  role="tab" ng-click="slidedemo('Mail-in Garments')">Mail-in Garments</a></li>
+                                            <li><a href="#cheque" data-toggle="tab" role="tab"  ng-click="slidedemo('Recent Measurement')">For Existing Clients</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                         <div class="tab-content" style="padding: 2px 35px;">
-                                            <div class="tab-pane fade active in"  id="size_standard">
+                                            <?php
+                                            if ($has_user) {
+                                                ?>
+                                                <div class="tab-pane  active in" id="previouseStyles" ng-controller="PreMeasurementCheck">
+                                                    <p style="margin: 20px 0px 10px;">
+                                                        If you have purchased from us before, You can select your measurement from your previous measurement profiles.
+
+
+                                                    </p>
+                                                    <table class="table">
+
+                                                        <tr ng-repeat="(meskey, mesval) in customizationDict.premeasurements">
+                                                            <th>
+                                                                <h3>{{mesval.name}}</h3><br/>
+                                                                <button type="button" ng-click="viewMeasurementOnly(mesval.name, mesval.measurements)" class="btn btn-default  btn-small-xs"  >View</button>
+                                                                <button type="button"  class="btn btn-default btn-small-xs"  title ="Favorite Profile"><i class="text-danger fa {{mesval.meausrement_data.status=='f'?'fa-heart':'fa-heart-o'}}"></i></button>
+
+                                                            </th>
+                                                            <td>
+
+
+                                                            </td>
+
+
+                                                            <td>Created On: {{mesval.meausrement_data.datetime}}</td>
+                                                            <td>                                
+                                                                <button type="button" ng-click="applyMessurements(mesval.meausrement_data.id, mesval.name, mesval.measurements)" class="btn btn-warning"  >Apply Measurement</button>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </table>
+                                                    <div class="cart-page-top table-responsive">
+                                                        <table class="table table-hover">
+                                                            <tbody id="quantity-holder">
+                                                                <tr>
+                                                                    <td colspan="4" class="text_right">
+                                                                        <div class="proceed-button pull-left " >
+                                                                            <a href=" <?php echo site_url("Cart/checkoutInit"); ?>" class="btn btn-danger  checkout_button_pre " ><i class="fa fa-arrow-left"></i> View Cart</a>
+                                                                        </div>
+
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="tab-pane fade <?php echo $has_user ? '' : 'active in'; ?> in"  id="size_standard">
 
 
 
@@ -185,7 +250,7 @@ $this->load->view('layout/header');
 
                                                 <div class="row">
                                                     <?php
-                                                    $this->load->view('Cart/sizes', array('vtype' => 'items', 'items'=>$custome_items));
+                                                    $this->load->view('Cart/sizes', array('vtype' => 'items', 'items' => $custome_items));
                                                     ?>
 
 
@@ -216,106 +281,14 @@ $this->load->view('layout/header');
                                                 </div>
                                             </div>
 
-                                            <!--start of custome measurement-->
-                                            <div class="tab-pane fade " id="bank">
-                                                <form action="#" method="post">
-                                                    <p>
-                                                    <table class="table table-responsive table-striped">
-                                                        <tr>
-                                                            <td style="width: 150px;">Measurements</td>
-                                                            <td class="text-center">Tap to select and slide left to right to change value</td>
-                                                            <!--<td style="width: 150px;"></td>-->
-                                                            <td style="width: 100px">Values <br><span style="font-size: 9px;">(In Inches)</span></td>
-                                                        </tr>
-                                                        <!--custome meausrements-->
-                                                        <?php
-                                                        foreach ($measurements_list as $key => $value) {
-                                                            $vlname = $value['title'];
-                                                            $vimg = $value['imagespath'];
-                                                            ?>
-                                                            <tr style="height: 150px;">
-                                                                <th>
-
-
-                                                            <div class="thumbnail" style="margin-bottom: 0px;">
-                                                                <img src="<?php echo $vimg; ?>" class="measurement_img">
-                                                                <h4 class="measurement_lable">
-                                                                    <?php
-                                                                    echo $vlname;
-                                                                    echo "<input class='input_display_none' name='measurement_title[]' value='$vlname'>"
-                                                                    ?>    
-
-                                                                </h4>
-
-                                                            </div>
-
-
-
-                                                            </th>
-                                                            <td style="padding-top: 54px;">
-
-                                                                <div id="slider-pips<?php echo $value['id']; ?>"></div>
-
-                                                            </td>
-    <!--                                                            <td>
-                                                                <select name="measurement_<?php echo $value['id']; ?>" ng-model="measurement_<?php echo $value['id']; ?>" ng-init="measurement_<?php echo $value['id']; ?> =<?php echo $value['standard_value']; ?>">
-                                                            <?php
-                                                            for ($i = $value['min_value']; $i <= $value['max_value']; $i++) {
-                                                                $vl1 = $i;
-
-                                                                echo "<option value='$vl1' " . ($value['standard_value'] == $i ? "selected" : '') . ">$vl1</option>";
-                                                            }
-                                                            ?>
-                                                                </select>
-                                                                <select ng-model="measurement_<?php echo $value['id']; ?>_fr">
-                                                                    <option></option>
-                                                                    <option value="1/8">1/8</option>
-                                                                    <option value="1/4">1/4</option>
-                                                                    <option value="3/8">3/8</option>
-                                                                    <option value="1/2">1/2</option>
-                                                                    <option value="5/8">5/8</option>
-                                                                    <option value="3/4">3/4</option>
-                                                                    <option value="7/8">7/8</option>
-                                                                </select>
-
-                                                            </td>-->
-
-                                                            <td>
-                                                                <input class="input_display_none" name="measurement_value[]" value="{{measurementDict['m<?php echo $value['id']; ?>'].mvalue}} {{measurementDict['m<?php echo $value['id']; ?>'].frvalue}}">
-                                                                <span class="measurement_text">{{measurementDict['m<?php echo $value['id']; ?>'].mvalue}}</span> <small class="fr_value">{{measurementDict['m<?php echo $value['id']; ?>'].frvalue}}"</small>
-                                                            </td>
-                                                            </tr>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                    </table>
-
-
-
+                                             <!--start of custome measurement-->
+                                            <div class="tab-pane  text-center" id="bank">
+                                                <div class="mt-5 mb-5">
+                                                    <p style="margin: 20px 0px 10px;">
+                                                        Click here to create your body measurements profile.
                                                     </p>
-                                                    <div class="cart-page-top table-responsive">
-                                                        <table class="table table-hover">
-                                                            <tbody id="quantity-holder">
-                                                                <tr>
-                                                                    <td colspan="4" class="text_right">
-                                                                        <div class="proceed-button pull-left " >
-                                                                            <a href=" <?php echo site_url("Cart/checkoutInit"); ?>" class="btn btn-default checkout_button_pre " ><i class="fa fa-arrow-left"></i> View Cart</a>
-                                                                        </div>
-                                                                        <div class="proceed-button pull-right ">
-
-                                                                            <input class="input_display_none" type ="hidden1" name="measurement_type" ng-model="measurementstyle.title"  >
-                                                                            <button type="submit" name="submit_measurement" class="btn btn-default checkout_button_next "  value="measurement">
-                                                                                Choose Shipping Address <i class="fa fa-arrow-right"></i>
-                                                                            </button>
-
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-
-                                                    </div>
-                                                </form>
+                                                    <a href=" <?php echo site_url("Cart/measurements"); ?>" class="btn btn-danger  checkout_button_pre " >Proceed For Measurement <i class="fa fa-arrow-right"></i></a>
+                                                </div>
                                             </div>
                                             <!--end of custome meausrement-->
 
@@ -430,11 +403,13 @@ $this->load->view('layout/header');
 
 <script type="text/javascript">
     var custom_items = "<?php echo implode(", ", $custome_items) ?>";
-    var avaiblecredits = 0;</script>
-
+    var itemarrays = "<?php echo implode("-", $items_array) ?>";
+    var avaiblecredits = 0;
+    var user_id = "<?php echo $has_user; ?>";</script>
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/noslider/nouislider.min.css">
 <script src="<?php echo base_url(); ?>assets/theme/noslider/nouislider.min.js" type="text/javascript"></script>
 
+<script src="<?php echo base_url(); ?>assets/theme/angular/preMeasurementCheckController.js"></script>
 
 
 <!--angular controllers-->
@@ -446,148 +421,50 @@ $this->load->view('layout/footer', array('custom_item' => 0, 'custom_id' => 0));
 
     App.controller('measurementController', function ($scope, $http, $timeout, $interval) {
 
-        $scope.measurementstyle = {'title': 'Standard Size - M'};
-
-        $scope.predefine = {'1': ['Shirt'],
+    $scope.measurementstyle = {'title': 'Standard Size - M'};
+    $scope.predefine = {'1': ['Shirt'],
             '2': ['Jacket', 'Pant'],
             '3': ['Pant'],
             '4': ['Jacket'],
-        };
-
-        $scope.standard_measurement1 = {'Shirt': '16L(Shirt)', 'Jacket': '34(Jacket)', 'Suit': '34(Jacket)', 'Pant': '32S(Pant)'};
-
-        $scope.standard_measurement = {'Shirt': '', 'Jacket': '', 'Pant': ''};
-        var cussta = custom_items.split(", ")
-        $timeout(function () {
+    };
+    $scope.standard_measurement1 = {'Shirt': '16L(Shirt)', 'Jacket': '34(Jacket)', 'Suit': '34(Jacket)', 'Pant': '32S(Pant)'};
+    $scope.standard_measurement = {'Shirt': '', 'Jacket': '', 'Pant': ''};
+    var cussta = custom_items.split(", ")
+            $timeout(function () {
             for (i in cussta) {
-                var temp = $scope.predefine[cussta[i]];
-                for (k in temp) {
-                    $scope.standard_measurement[temp[k]] = $scope.standard_measurement1[temp[k]];
-                    $(".activemeasurement" + temp[k]).click();
-                }
+            var temp = $scope.predefine[cussta[i]];
+            for (k in temp) {
+            $scope.standard_measurement[temp[k]] = $scope.standard_measurement1[temp[k]];
+//            $(".activemeasurement" + temp[k]).click();
+            }
 
 
             }
-            $scope.slidedemostandard();
-        }, 500)
+//            $scope.slidedemostandard();
+            }, 500)
 
 
 //        $("#measurement_profile_M").attr("checked", "true");
 
-        $scope.custome_items = <?php echo json_encode($custome_items); ?>;
-        $scope.getstandardsize = "<?php echo site_url("Api/getstsize"); ?>";
+            $scope.custome_items = <?php echo json_encode($custome_items); ?>;
+    $scope.getstandardsize = "<?php echo site_url("Api/getstsize"); ?>";
+    $scope.measurementDict = {};
+    $scope.slidedemostandard = function () {
+    var stsize = [$scope.standard_measurement.Jacket, $scope.standard_measurement.Shirt, $scope.standard_measurement.Pant];
+    var trsize = (stsize.join("  ")).trim();
+    $scope.measurementstyle.title = trsize.replace("  ", ", ");
+    }
 
-        console.log($scope.getstandardsize);
-
-
-
-
-
-        $scope.measurementDict = {};
+    $scope.measurementPreData = {"userdata": []};
+    $http.get(baseurl + "Api/getUserPreMeasurementByItem_get/" + custom_items).then(function (rdata) {
+    $scope.measurementPreData.userdata = rdata.data;
+    });
 <?php
-foreach ($measurements_list as $key => $value) {
+if ($has_user) {
     ?>
-            $scope.measurementDict["m<?php echo $value['id']; ?>"] = {'mvalue': <?php echo $value['standard_value']; ?>, 'frvalue': ''};
+        $scope.measurementstyle.title = "Previous Measurement";
     <?php
 }
 ?>
 
-
-
-
-<?php
-foreach ($measurements_list as $key => $value) {
-    ?>
-            //slider section start
-            $timeout(function () {
-                //                $("#measurement_profile_M").click();
-
-
-                var pipsSlider<?php echo $value['id']; ?> = document.getElementById('slider-pips<?php echo $value['id']; ?>');
-                noUiSlider.create(pipsSlider<?php echo $value['id']; ?>, {
-                    start: [<?php echo $value['standard_value']; ?>],
-                    connect: true,
-                    step: 0.125,
-                    tooltips: [true, ],
-                    range: {
-                        'min': <?php echo $value['min_value']; ?>,
-                        'max': <?php echo $value['max_value']; ?>
-                    }
-                });
-                pipsSlider<?php echo $value['id']; ?>.noUiSlider.on('update', function (values, handle) {
-                    var value = values[handle];
-                    var mvalue = ("" + value).split(".")[0];
-                    var frvalue = ("" + value).split(".")[1];
-                    var frdict = {13: "1/8", 25: "1/4", 38: "3/8", 50: "1/2", 63: "5/8", 75: "3/4", 88: "7/8"};
-                    var frmvalue = frdict[frvalue];
-                    $timeout(function () {
-                        $scope.measurementDict["m<?php echo $value['id']; ?>"]["mvalue"] = mvalue;
-                        $scope.measurementDict["m<?php echo $value['id']; ?>"]["frvalue"] = frmvalue;
-                    }, 100)
-                });
-
-
-
-
-            }, 1000)
-
-
-            //  end of slider section
-    <?php
-}
-?>
-
-
-        $scope.slidedemo = function (mestitle) {
-
-            console.log($scope.standard_measurement);
-
-            $scope.measurementstyle.title = mestitle;
-            var sliderval = <?php echo $measurements_list[0]['id']; ?>;
-            var svalue = <?php echo $measurements_list[0]['standard_value']; ?>;
-            var pipsSlider123 = document.getElementById('slider-pips' + sliderval);
-//       $(".noUi-tooltip").first().show("slow")
-            $timeout(function () {
-
-                pipsSlider123.noUiSlider.set([svalue + 20, null]);
-                $timeout(function () {
-//                    $(".noUi-tooltip").first().css("display", "none")
-                    pipsSlider123.noUiSlider.set([svalue, null]);
-                }, 700)
-            }, 1000)
-
-
-        }
-
-        $scope.slidedemostandard = function () {
-            console.log($scope.standard_measurement);
-            var checksizes = [];
-            for (i in $scope.standard_measurement) {
-                var mobject = $scope.standard_measurement[i];
-                if (mobject == "") {
-                    console.log("#id" + i)
-                    checksizes.push("#id" + i)
-//                  $("#id"+i).css("display", "none");
-                }
-                else {
-
-                }
-            }
-
-            var stsize = [$scope.standard_measurement.Jacket, $scope.standard_measurement.Shirt, $scope.standard_measurement.Pant];
-
-            var trsize = (stsize.join("  ")).trim();
-            $scope.measurementstyle.title = trsize.replace("  ", ", ");
-            console.log("--" + (stsize.join(" ")).trim() + "--");
-        }
-
-
-
-
-
-
-    })
-
-
-
-</script>
+    });</script>

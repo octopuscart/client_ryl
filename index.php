@@ -55,8 +55,13 @@
  */
 //define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
-
+$istest = 1;
+if($istest){
+    define('ENVIRONMENT', 'development');
+}
+else{
     define('ENVIRONMENT', 'production');
+}
 
 /*
  * ---------------------------------------------------------------

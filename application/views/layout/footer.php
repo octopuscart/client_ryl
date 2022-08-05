@@ -97,7 +97,6 @@
 <script src="<?php echo base_url(); ?>assets/theme/angular/shopController.js"></script>
 
 <!-- JavaScripts --> 
-<script src="<?php echo base_url(); ?>assets/theme/js/vendors/jquery/jquery.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/theme/js/vendors/wow.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/theme/js/vendors/bootstrap.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/theme/js/vendors/jquery.magnific-popup.min.js"></script> 

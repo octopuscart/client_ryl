@@ -73,7 +73,7 @@ $paymentstatus = "";
 <div id="content" ng-controller="OrderDetailsController"> 
 
     <!--======= PAGES INNER =========-->
-    <section class="order-details-page-area">
+      <section class="order-details-page-area">
         <div class="container">
             <div class="row  "> 
 
@@ -137,7 +137,7 @@ $paymentstatus = "";
 
                 </div>
                 <div class="col-md-9">
-                    <div class="pricing">
+                    <div class="row">
                         <div class="col-md-4">
 
                             <article class="order_box">
@@ -249,7 +249,7 @@ $paymentstatus = "";
 
                                         <td style="text-align: right;width: 100px"">Price</td>
                                         <td style="text-align: right;width: 10px">Qantity</td>
-                                        <td style="text-align: right;width: 100px">Total</td>
+                                        <td style="text-align: right;width: 120px">Total</td>
                                     </tr>
                                     <!--cart details-->
                                     <?php
@@ -273,7 +273,7 @@ $paymentstatus = "";
                                             <small style="font-size: 12px;">(<?php echo $product->sku; ?>)</small>
 
                                             <h4 class="panel-title">
-                                                <a role="button" class="btn  btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $product->id; ?>" aria-expanded="true" aria-controls="collapseOne" style="    margin: 5px 0px;
+                                                <a role="button" class="btn  btn-default btn-xs" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $product->id; ?>" aria-expanded="true" aria-controls="collapseOne" style=" line-height: 15px;   margin: 5px 0px;
                                                    padding: 4px;">
                                                     View Summary
                                                 </a>
@@ -309,12 +309,12 @@ $paymentstatus = "";
                                             <?php
                                             if ($product->extra_price > 0) {
                                                 ?>
-                                            <span  style="font-size: 12px;
-                                          font-weight: 600;
-                                          text-align: center;">
-                                        <br/>
-                                       {{ <?php echo $product->price - $product->extra_price; ?> |currency:""}}
-                                              + {{ <?php echo $product->extra_price; ?> |currency:""}}
+                                                <span  style="font-size: 12px;
+                                                       font-weight: 600;
+                                                       text-align: center;">
+                                                    <br/>
+                                                    {{ <?php echo $product->price - $product->extra_price; ?> |currency:""}}
+                                                    + {{ <?php echo $product->extra_price; ?> |currency:""}}
                                                 </span>
                                                 <?php
                                             }
@@ -339,7 +339,7 @@ $paymentstatus = "";
                                         echo $order_data->measurement_style;
                                         if (count($measurements_items)) {
                                             ?>
-                                            <a role="button" class="btn btn-xs btn-default" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements" aria-expanded="true" aria-controls="collapseOne">
+                                            <a role="button" class="btn btn-xs btn-default btn-small-xs" data-toggle="collapse" data-parent="#accordion" href="#collapsemeasurements" aria-expanded="true" aria-controls="collapseOne">
                                                 View Measurement
                                             </a>
                                             <div id="collapsemeasurements" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
@@ -350,7 +350,12 @@ $paymentstatus = "";
                                                             echo "<ul class='list-group'>";
                                                             foreach ($measurements_items as $keym => $valuem) {
                                                                 $mvalues = explode(" ", $valuem['measurement_value']);
-                                                                echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $mvalues[0] . "</span><span class='fr_value'>" . $mvalues[1] . '"' . "</span></span></li>";
+                                                                $unit = $valuem['unit'] == "inch" ? '"' : '';
+                                                                if ($unit) {
+                                                                    echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $mvalues[0] . "</span><span class='fr_value'>" . $mvalues[1] . '' . "$unit</span></span></li>";
+                                                                } else {
+                                                                    echo "<li class='list-group-item'>" . $valuem['measurement_key'] . " <span class='measurement_right_text'><span class='measurement_text'>" . $valuem['measurement_value'] . "</span></span></li>";
+                                                                }
                                                             }
                                                             echo "</ul>";
                                                             ?>                             
@@ -426,7 +431,7 @@ $paymentstatus = "";
                                     </tr>
 
                                     <tr>
-                                        <td colspan="3"  rowspan="4" style="font-size: 12px">
+                                        <td colspan="3"  rowspan="5" style="font-size: 12px">
                                             <b>Total Amount in Words:</b><br/>
                                             <span style="text-transform: capitalize"> <?php echo $order_data->amount_in_word; ?></span>
                                         </td>
@@ -436,10 +441,14 @@ $paymentstatus = "";
                                         <td colspan="2" style="text-align: right">Sub Total</td>
                                         <td style="text-align: right;width: 60px">{{"<?php echo $order_data->sub_total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
                                     </tr>
-    <!--                                <tr>
-                                        <td colspan="2" style="text-align: right">Credit Used</td>
-                                        <td style="text-align: right;width: 60px"><?php echo $order_data->credit_price; ?> </td>
-                                    </tr>-->
+                                    <tr>
+                                        <td colspan="2" style="text-align: right">Coupon Discount</td>
+                                        <td style="text-align: right;width: 60px">{{"<?php echo $order_data->discount; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="text-align: right">Shipping</td>
+                                        <td style="text-align: right;width: 60px">{{"<?php echo $order_data->shipping; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>
+                                    </tr>
                                     <tr>
                                         <td colspan="2" style="text-align: right">Total Amount</td>
                                         <td style="text-align: right;width: 60px">{{"<?php echo $order_data->total_price; ?>"|currency:"<?php echo globle_currency; ?> "}} </td>

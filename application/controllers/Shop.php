@@ -8,10 +8,12 @@ class Shop extends CI_Controller {
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->library('session');
-        $this->user_id = $this->session->userdata('logged_in')['login_id'];
+        $this->userobj = $this->session->userdata('logged_in');
+        $this->user_id = $this->userobj ? $this->userobj['login_id'] : 0;
     }
 
     public function index() {
+//        redirect("appointment");
         $product_home_slider_bottom = $this->Product_model->product_home_slider_bottom();
         $categories = $this->Product_model->productListCategories(0);
         $data["categories"] = $categories;
@@ -26,16 +28,9 @@ class Shop extends CI_Controller {
 
         $query = $this->db->get('sliders');
         $data['sliders'] = $query->result();
-        
-        
-        $this->db->from('style_tips');
-        $this->db->order_by("id", "desc");
-        $this->db->limit(3);
-        $query = $this->db->get();
-        $stylebook =   $query ? $query->result_array():[];
 
-
-        $data['stylebook'] = $stylebook;
+        $query = $this->db->get('content_testimonial');
+        $data['content_testimonial'] = $query->result_array();
 
         $this->load->view('home', $data);
     }
@@ -100,62 +95,80 @@ class Shop extends CI_Controller {
     }
 
     public function faqs() {
-        $this->load->view('pages/faqs');
+        $query = $this->db->get('content_faq');
+        $data['content_faq'] = $query->result_array();
+        $this->load->view('pages/faqs', $data);
     }
 
     public function catalogue() {
         $this->load->view('pages/catalogue');
     }
 
-    
-    public function test(){
-        $mon_fri=[10,11,12,1,2,3,4,5,6,7,8];
-        $sut = [11,12,1,2,3,4,5,6,7];
-        $sunholi = [12,1,2,3,4,5];
-        $timeing = [];
-        $timeing_array = array();
-        foreach ($mon_fri as $key => $value) {
-            $t1 =  $value>9?"$value:00 AM":"0$value:00 PM";
-            array_push($timeing, $t1);
-            $t2=  $value>9?"$value:30 AM":"0$value:30 PM";
-            array_push($timeing, $t2);
-        }
-        foreach ($timeing as $key => $value) {
-            echo "'$value',";
-        }
-        print_r($timeing);
+    public function lookbook() {
+        $query = $this->db->get('look_books');
+        $data['lookbook'] = $query->result_array();
+        $this->load->view('pages/look_book', $data);
     }
-    
+
+    public function offers() {
+        $query = $this->db->where("coupon_type", "All User")->get('coupon_conf');
+        $data['coupons'] = $query ? $query->result_array():array();
+        $this->load->view('pages/offers', $data);
+    }
+
+
     public function appointment() {
-    
-        $timing_array = array(
-            'mon_fri'=>['10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 AM','12:30 AM','01:00 PM',
-                        '01:30 PM','02:00 PM','02:30 PM','03:00 PM','03:30 PM','04:00 PM','04:30 PM',
-                        '05:00 PM','05:30 PM','06:00 PM','06:30 PM','07:00 PM','07:30 PM','08:00 PM'],
-            '6'=>['11:00 AM','11:30 AM','12:00 AM','12:30 AM','01:00 PM',
-                        '01:30 PM','02:00 PM','02:30 PM','03:00 PM','03:30 PM','04:00 PM','04:30 PM',
-                        '05:00 PM','05:30 PM','06:00 PM','06:30 PM','07:00 PM'],
-            '0'=>['12:00 AM','12:30 AM','01:00 PM','01:30 PM','02:00 PM','02:30 PM','03:00 PM','03:30 PM',
-                '04:00 PM','04:30 PM', '05:00 PM'],
-        );
-        
-        $data['timing_data'] = $timing_array;
-        
+        $timeslot = [
+            "07:00 AM", "08:00AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM",
+            "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM",
+            "09:00 PM", "10:00 PM", "11:00 PM",
+        ];
+
+        $data['timeslot'] = $timeslot;
+
+        $appointmentdetailslocal = [array(
+        "type" => "local",
+        "id" => "au0_app",
+        "country" => "Hong Kong",
+        "city_state" => "Central",
+        "hotel" => "SHOWROOM",
+        "address" => "Shop A, 2/F Entertainment Building,<br/>30 Queen's Road, Central, Hong Kong",
+        "days" => "",
+        "start_date" => "",
+        "end_date" => "",
+        "contact_no" => " +(852) 2655 9778",
+        "dates" => [
+            array("date" => "Mon-Fri", "timing1" => "10:00 AM", "timing2" => "08:00 PM"),
+            array("date" => "Sat-Sun", "timing1" => "11:00 AM", "timing2" => "07:00 PM"),
+          
+        ]
+            ),];
+
+        $data['appointmentdetailslocal'] = $appointmentdetailslocal;
+
+        $allappointment = $this->Product_model->AppointmentDataAll();
+        $data['appointmentdatausa'] = $allappointment;
+
         if (isset($_POST['submit'])) {
             $appointment = array(
+                "country" => $this->input->post('country'),
+                "city_state" => $this->input->post('city_state'),
+                "hotel" => $this->input->post('hotel'),
+                "address" => $this->input->post('address'),
                 'last_name' => $this->input->post('last_name'),
                 'first_name' => $this->input->post('first_name'),
                 'email' => $this->input->post('email'),
                 'contact_no' => $this->input->post('contact_no'),
                 'select_time' => $this->input->post('select_time'),
                 'select_date' => $this->input->post('select_date'),
-                'no_of_person' => 1,
-                'referral' => "Web",
+                'no_of_person' => $this->input->post('no_of_person'),
+                'referral' => $this->input->post('referral'),
                 'datetime' => date("Y-m-d H:i:s a"),
                 'appointment_type' => "Local",
             );
 
             $this->db->insert('appointment_list', $appointment);
+            $appointment['contact_no2'] = $this->input->post('contact_no2');
 
             $emailsender = email_sender;
             $sendername = email_sender_name;
@@ -163,10 +176,11 @@ class Shop extends CI_Controller {
             $sendernameeq = $this->input->post('last_name') . " " . $this->input->post('first_name');
             if ($this->input->post('email')) {
                 $this->email->set_newline("\r\n");
-                $this->email->from(email_bcc, $sendername);
+                $this->email->from(email_sender, $sendername);
+                $this->email->reply_to(email_bcc, $sendername);
                 $this->email->to($this->input->post('email'));
                 $this->email->bcc(email_bcc);
-                $subjectt = email_sender_name." Appointment : " . $appointment['select_date'] . " (" . $appointment['select_time'] . ")";
+                $subjectt = email_sender_name . " Appointment : " . $appointment['select_date'] . " (" . $appointment['select_time'] . ")";
                 $orderlog = array(
                     'log_type' => 'Appointment',
                     'log_datetime' => date('Y-m-d H:i:s'),
@@ -180,9 +194,8 @@ class Shop extends CI_Controller {
 
                 $appointment['appointment'] = $appointment;
 
-                $checksend = REPORT_MODE;
                 $htmlsmessage = $this->load->view('Email/appointment', $appointment, true);
-                if ($checksend) {
+                if (REPORT_MODE == 1) {
                     $this->email->message($htmlsmessage);
                     $this->email->print_debugger();
                     $send = $this->email->send();
@@ -199,115 +212,139 @@ class Shop extends CI_Controller {
 
             redirect('Shop/appointment');
         }
+
         $this->load->view('pages/appointment', $data);
     }
 
-    public function lookbook() {
-        $suitsimagelist = [31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-            1, 2, 3, 4, 5, 6, 7, 15, 16, 17, 18, 19, 20, 21, 22, 23,
-            24, 25, 26, 27, 28, 29
+    public function appointment2() {
+
+        redirect("appointment");
+        $timeslot = [
+            "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM",
+            "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM",
+            "09:00 PM", "10:00 PM",
         ];
-        $stylearray = array();
-        foreach ($suitsimagelist as $key => $value) {
-            $temp = array(
-                "style_no" => "90$value",
-                "title" => "SUPER 130'S",
-                "short_description" => "SUPER 130'S MADE IN ITALY",
-                "image" => "suits/$value.jpg",
+        $timeslot2 = [];
+        foreach ($timeslot as $key => $value) {
+            $t1 = explode(":", $value)[0];
+            $ap = explode(" ", $value)[1];
+            array_push($timeslot2, $value);
+            array_push($timeslot2, $t1 . ":10 " . $ap);
+            array_push($timeslot2, $t1 . ":20 " . $ap);
+            array_push($timeslot2, $t1 . ":30 " . $ap);
+            array_push($timeslot2, $t1 . ":40 " . $ap);
+            array_push($timeslot2, $t1 . ":50 " . $ap);
+        }
+
+
+
+        $data['timeslot'] = $timeslot;
+        $data['timeslot2'] = $timeslot2;
+
+        $appointmentdetailslocal = [array(
+        "type" => "local",
+        "id" => "au0_app",
+        "country" => "USA",
+        "city_state" => "Dallas, TX",
+        "hotel" => "Omni Dallas Hotel",
+        "address" => "555 S Lamar St, Dallas, TX 75202, USA",
+        "days" => "16th Sep - 19th Sep 2019",
+        "start_date" => "2019-09-16",
+        "end_date" => "2019-09-19",
+        "contact_no" => " +(852) 2369 1196",
+        "dates" => [
+            array("date" => "2019-09-16", "timing1" => "07:00 AM", "timing2" => "11:00 PM"),
+            array("date" => "2019-09-17", "timing1" => "07:00 AM", "timing2" => "11:00 PM"),
+            array("date" => "2019-09-18", "timing1" => "07:00 AM", "timing2" => "11:00 PM"),
+            array("date" => "2019-09-19", "timing1" => "07:00 AM", "timing2" => "11:00 PM"),
+        ]
+            ),];
+
+        $data['appointmentdetailslocal'] = $appointmentdetailslocal;
+
+        $data['appointmentdatausa'] = array();
+
+        if (isset($_POST['submit'])) {
+            $appointment = array(
+                "country" => $this->input->post('country'),
+                "city_state" => $this->input->post('city_state'),
+                "hotel" => $this->input->post('hotel'),
+                "address" => $this->input->post('address'),
+                'last_name' => $this->input->post('last_name'),
+                'first_name' => $this->input->post('first_name'),
+                'email' => $this->input->post('email'),
+                'contact_no' => $this->input->post('contact_no'),
+                'select_time' => $this->input->post('select_time'),
+                'select_date' => $this->input->post('select_date'),
+                'no_of_person' => $this->input->post('no_of_person'),
+                'referral' => $this->input->post('referral'),
+                'datetime' => date("Y-m-d H:i:s a"),
+                'appointment_type' => "Local",
             );
-            array_push($stylearray, $temp);
-        }
-        $data['stylearray'] = $stylearray;
-         $this->load->view('pages/lookbook', $data);
-    }
 
-   
-    
-    
-    
-      public function stylingTips() {
-        $query = $this->db->get('style_tips');
-        $data['stylebook'] = $query->result_array();
-        $this->load->view('pages/stylebook', $data);
-    }
+            $this->db->insert('appointment_list', $appointment);
+            $appointment['contact_no2'] = $this->input->post('contact_no2');
 
-    function styleTipsDetails($style_index, $title) {
-        $this->db->where('id', $style_index);
-        $query = $this->db->get('style_tips');
+            $emailsender = email_sender;
+            $sendername = email_sender_name;
+            $email_bcc = email_bcc;
+            $sendernameeq = $this->input->post('last_name') . " " . $this->input->post('first_name');
+            if ($this->input->post('email')) {
+                $this->email->set_newline("\r\n");
+                $this->email->from(email_sender, $sendername);
+                $this->email->reply_to(email_bcc, $sendername);
+                $this->email->to($this->input->post('email'));
+                $this->email->bcc(email_bcc);
+                $subjectt = email_sender_name . " Appointment : " . $appointment['select_date'] . " (" . $appointment['select_time'] . ")";
+                $orderlog = array(
+                    'log_type' => 'Appointment',
+                    'log_datetime' => date('Y-m-d H:i:s'),
+                    'user_id' => 'Appointment User',
+                    'log_detail' => $sendernameeq . "  " . $subjectt
+                );
+                $this->db->insert('system_log', $orderlog);
 
-        $styleobj = $query->row();
-        $data['styleobj'] = $styleobj;
+                $subject = $subjectt;
+                $this->email->subject($subject);
 
-        $configuration = $this->config->load('seo_config');
+                $appointment['appointment'] = $appointment;
 
-        //$seotitle_o = $this->config->item("seo_title");
-
-        $seotitle1 = "Royal Tailor | " . $styleobj->title;
-        $seodescription = $styleobj->description;
-
-        $this->config->set_item('seo_title', $seotitle1);
-        $this->config->set_item('seo_desc', $seodescription);
-
-
-        $this->db->from('style_tips');
-        $this->db->order_by("id", "desc");
-        $this->db->limit(5);
-        $query = $this->db->get();
-        $stylebook = $query->result_array();
-
-
-        $data['stylebook'] = $stylebook;
-
-        $this->db->from('style_tips');
-        $this->db->order_by("id", "desc");
-        $query = $this->db->get();
-        $stylebook1 = $query->result_array();
-
-        $tagarray1 = array();
-        foreach ($stylebook1 as $key => $value) {
-            $tags = $value['tag'];
-            $tagarray = explode(", ", $tags);
-            foreach ($tagarray as $key1 => $value1) {
-                $tagarray1[$value1] = [];
+                $htmlsmessage = $this->load->view('Email/appointment', $appointment, true);
+                if (REPORT_MODE == 1) {
+                    $this->email->message($htmlsmessage);
+                    $this->email->print_debugger();
+                    $send = $this->email->send();
+                    if ($send) {
+                        echo json_encode("send");
+                    } else {
+                        $error = $this->email->print_debugger(array('headers'));
+                        echo json_encode($error);
+                    }
+                } else {
+                    echo $htmlsmessage;
+                }
             }
+
+            redirect('Shop/appointment2');
         }
 
-        $data['tagsarray'] = $tagarray1;
-
-
-
-        $this->load->view('pages/stylebookdeails', $data);
+        $this->load->view('pages/appointment2', $data);
     }
 
-    public function countrylist() {
-        $countrylist = [['ALBANIA', 'AL'], ['ALGERIA', 'DZ'], ['ANDORRA', 'AD'], ['ANGOLA', 'AO'], ['ANGUILLA', 'AI'], ['ANTIGUA & BARBUDA', 'AG'], ['ARGENTINA', 'AR'], ['ARMENIA', 'AM'], ['ARUBA', 'AW'], ['AUSTRALIA', 'AU'], ['AUSTRIA', 'AT'], ['AZERBAIJAN', 'AZ'], ['BAHAMAS', 'BS'], ['BAHRAIN', 'BH'], ['BARBADOS', 'BB'], ['BELARUS', 'BY'], ['BELGIUM', 'BE'], ['BELIZE', 'BZ'], ['BENIN', 'BJ'], ['BERMUDA', 'BM'], ['BHUTAN', 'BT'], ['BOLIVIA', 'BO'], ['BOSNIA & HERZEGOVINA', 'BA'], ['BOTSWANA', 'BW'], ['BRAZIL', 'BR'], ['BRITISH VIRGIN ISLANDS', 'VG'], ['BRUNEI', 'BN'], ['BULGARIA', 'BG'], ['BURKINA FASO', 'BF'], ['BURUNDI', 'BI'], ['CAMBODIA', 'KH'], ['CAMEROON', 'CM'], ['CANADA', 'CA'], ['CAPE VERDE', 'CV'], ['CAYMAN ISLANDS', 'KY'], ['CHAD', 'TD'], ['CHILE', 'CL'], ['CHINA', 'C2'], ['COLOMBIA', 'CO'], ['COMOROS', 'KM'], ['CONGO - BRAZZAVILLE', 'CG'], ['CONGO - KINSHASA', 'CD'], ['COOK ISLANDS', 'CK'], ['COSTA RICA', 'CR'], ['COTE D IVOIRE', 'CI'], ['CROATIA', 'HR'], ['CYPRUS', 'CY'], ['CZECH REPUBLIC', 'CZ'], ['DENMARK', 'DK'], ['DJIBOUTI', 'DJ'], ['DOMINICA', 'DM'], ['DOMINICAN REPUBLIC', 'DO'], ['ECUADOR', 'EC'], ['EGYPT', 'EG'], ['EL SALVADOR', 'SV'], ['ERITREA', 'ER'], ['ESTONIA', 'EE'], ['ETHIOPIA', 'ET'], ['FALKLAND ISLANDS', 'FK'], ['FAROE ISLANDS', 'FO'], ['FIJI', 'FJ'], ['FINLAND', 'FI'], ['FRANCE', 'FR'], ['FRENCH GUIANA', 'GF'], ['FRENCH POLYNESIA', 'PF'], ['GABON', 'GA'], ['GAMBIA', 'GM'], ['GEORGIA', 'GE'], ['GERMANY', 'DE'], ['GIBRALTAR', 'GI'], ['GREECE', 'GR'], ['GREENLAND', 'GL'], ['GRENADA', 'GD'], ['GUADELOUPE', 'GP'], ['GUATEMALA', 'GT'], ['GUINEA', 'GN'], ['GUINEA-BISSAU', 'GW'], ['GUYANA', 'GY'], ['HONDURAS', 'HN'], ['HONG KONG', 'HK'], ['HUNGARY', 'HU'], ['ICELAND', 'IS'], ['INDIA', 'IN'], ['INDONESIA', 'ID'], ['IRELAND', 'IE'], ['ISRAEL', 'IL'], ['ITALY', 'IT'], ['JAMAICA', 'JM'], ['JAPAN', 'JP'], ['JORDAN', 'JO'], ['KAZAKHSTAN', 'KZ'], ['KENYA', 'KE'], ['KIRIBATI', 'KI'], ['KUWAIT', 'KW'], ['KYRGYZSTAN', 'KG'], ['LAOS', 'LA'], ['LATVIA', 'LV'], ['LESOTHO', 'LS'], ['LIECHTENSTEIN', 'LI'], ['LITHUANIA', 'LT'], ['LUXEMBOURG', 'LU'], ['MACEDONIA', 'MK'], ['MADAGASCAR', 'MG'], ['MALAWI', 'MW'], ['MALAYSIA', 'MY'], ['MALDIVES', 'MV'], ['MALI', 'ML'], ['MALTA', 'MT'], ['MARSHALL ISLANDS', 'MH'], ['MARTINIQUE', 'MQ'], ['MAURITANIA', 'MR'], ['MAURITIUS', 'MU'], ['MAYOTTE', 'YT'], ['MEXICO', 'MX'], ['MICRONESIA', 'FM'], ['MOLDOVA', 'MD'], ['MONACO', 'MC'], ['MONGOLIA', 'MN'], ['MONTENEGRO', 'ME'], ['MONTSERRAT', 'MS'], ['MOROCCO', 'MA'], ['MOZAMBIQUE', 'MZ'], ['NAMIBIA', 'NA'], ['NAURU', 'NR'], ['NEPAL', 'NP'], ['NETHERLANDS', 'NL'], ['NEW CALEDONIA', 'NC'], ['NEW ZEALAND', 'NZ'], ['NICARAGUA', 'NI'], ['NIGER', 'NE'], ['NIGERIA', 'NG'], ['NIUE', 'NU'], ['NORFOLK ISLAND', 'NF'], ['NORWAY', 'NO'], ['OMAN', 'OM'], ['PALAU', 'PW'], ['PANAMA', 'PA'], ['PAPUA NEW GUINEA', 'PG'], ['PARAGUAY', 'PY'], ['PERU', 'PE'], ['PHILIPPINES', 'PH'], ['PITCAIRN ISLANDS', 'PN'], ['POLAND', 'PL'], ['PORTUGAL', 'PT'], ['QATAR', 'QA'], ['R\xc3\x89UNION', 'RE'], ['ROMANIA', 'RO'], ['RUSSIA', 'RU'], ['RWANDA', 'RW'], ['SAMOA', 'WS'], ['SAN MARINO', 'SM'], ['SAO TOME & PRINCIPE', 'ST'], ['SAUDI ARABIA', 'SA'], ['SENEGAL', 'SN'], ['SERBIA', 'RS'], ['SEYCHELLES', 'SC'], ['SIERRA LEONE', 'SL'], ['SINGAPORE', 'SG'], ['SLOVAKIA', 'SK'], ['SLOVENIA', 'SI'], ['SOLOMON ISLANDS', 'SB'], ['SOMALIA', 'SO'], ['SOUTH AFRICA', 'ZA'], ['SOUTH KOREA', 'KR'], ['SPAIN', 'ES'], ['SRI LANKA', 'LK'], ['ST. HELENA', 'SH'], ['ST. KITTS & NEVIS', 'KN'], ['ST. LUCIA', 'LC'], ['ST. PIERRE & MIQUELON', 'PM'], ['ST. VINCENT & GRENADINES', 'VC'], ['SURINAME', 'SR'], ['SVALBARD & JAN MAYEN', 'SJ'], ['SWAZILAND', 'SZ'], ['SWEDEN', 'SE'], ['SWITZERLAND', 'CH'], ['TAIWAN', 'TW'], ['TAJIKISTAN', 'TJ'], ['TANZANIA', 'TZ'], ['THAILAND', 'TH'], ['TOGO', 'TG'], ['TONGA', 'TO'], ['TRINIDAD & TOBAGO', 'TT'], ['TUNISIA', 'TN'], ['TURKMENISTAN', 'TM'], ['TURKS & CAICOS ISLANDS', 'TC'], ['TUVALU', 'TV'], ['UGANDA', 'UG'], ['UKRAINE', 'UA'], ['UNITED ARAB EMIRATES', 'AE'], ['UNITED KINGDOM', 'GB'], ['UNITED STATES', 'US'], ['URUGUAY', 'UY'], ['VANUATU', 'VU'], ['VATICAN CITY', 'VA'], ['VENEZUELA', 'VE'], ['VIETNAM', 'VN'], ['WALLIS & FUTUNA', 'WF'], ['YEMEN', 'YE'], ['ZAMBIA', 'ZM'], ['ZIMBABWE', 'ZW']];
-        foreach ($countrylist as $key => $value) {
-            $cf = $value[0];
-            $cc = $value[1];
-            $products = array(
-                "country_name" => $cf,
-                "country_code" => $cc,
-            );
-            # $this->db->insert('country', $products);
-        }
+    public function appointmentReport() {
+        $this->db->order_by("datetime desc");
+        $query = $this->db->get('appointment_list');
+        $result = $query->result_array();
+        $data['appointmentdata'] = $result;
+        $this->load->view('pages/appointment3', $data);
     }
 
-    public function removedouble() {
-        $query = "select id, title, count(title) as counter from products group by title";
-        $query = $this->db->query($query);
-        $data = $query->result_array();
-        echo "<pre>";
-        foreach ($data as $key => $value) {
-            if ($value['counter'] > 1) {
-                $ids = $value['id'];
-                #  $this->db->where('id', $ids); //set column_name and value in which row need to update
-                # $this->db->delete('products'); //
-            }
-        }
+    function privacy_policy() {
+        $this->load->view('pages/pp');
     }
-    
-    
-    
-    
+
+    public function terms_condition() {
+        $this->load->view('pages/T&C');
+    }
 
 }

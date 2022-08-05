@@ -20,7 +20,7 @@ $this->load->view('layout/header');
 
 <!-- Inner Page Banner Area End Here -->
 <!-- Login Registration Page Area Start Here -->
-<div class="login-registration-page-area" style="padding: 20px 0;" ng-controller="LoginController">
+<div class="login-registration-page-area" style="padding: 20px 0;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -61,12 +61,9 @@ $this->load->view('layout/header');
                         <input type="email"  class="form-control"name="email" placeholder="Email " required=""/>
                         <label>Password *</label>
                         <input type="password"  class="form-control"name="password" placeholder="Password *" required=""/>
-                        <br/>
+   <br/>
                         <button class="btn btn-default" name="signIn" type="submit" value="signIn">Login</button>
-                          <br/>
-                             <hr/>
-                        <p>Forgotten password? <a href="#" ng-click="requestPasswordReset()">Click here</a></p>
-                        <br/>
+                        <!--<span><input type="checkbox" name="remember"/>Remember Me</span>-->
                     </form>
                 </div>
             </div>
@@ -115,36 +112,36 @@ $this->load->view('layout/header');
                             <div class="col-md-6">
                                 <input type="hidden" name="birth_date" id="birth_date" value="{{birth_year}}-{{birth_month}}-{{date_birth}}"> 
                                 <label>Date Of Birth *</label>
-                                <div class="row" style="    margin: 0;">
-                                    <select id="birth_year" name="birth_year"  ng-model="birth_year" class="form-control bg_light w_full border_none bith_date_select_year"  required >
-                                        <option value="" >-YYYY-</option>
-                                        <?php
-                                        for ($i = (date('Y') - 100); $i <= date('Y'); $i++) {
-                                            echo "<option value='$i'>$i</option>";
-                                        }
-                                        ?>
-                                    </select>
+                               <div class="row" style="    margin: 0;">
+                                <select id="birth_year" name="birth_year"  ng-model="birth_year" class="form-control bg_light w_full border_none bith_date_select_year"  required >
+                                    <option value="" >-YYYY-</option>
+                                    <?php
+                                    for ($i = (date('Y') - 100); $i <= date('Y'); $i++) {
+                                        echo "<option value='$i'>$i</option>";
+                                    }
+                                    ?>
+                                </select>
 
-                                    <select id="birth_month" ng-model="birth_month" name="birth_month" class="form-control bg_light w_full border_none bith_date_select" required >
-                                        <option value="" >-MM-</option>
-                                        <?php
-                                        for ($i = 1; $i <= 12; $i++) {
-                                            $mmdate = $i < 10 ? "0" . $i : $i;
-                                            echo "<option value='$mmdate'>$mmdate</option>";
-                                        }
-                                        ?>
-                                    </select> 
+                                <select id="birth_month" ng-model="birth_month" name="birth_month" class="form-control bg_light w_full border_none bith_date_select" required >
+                                    <option value="" >-MM-</option>
+                                     <?php
+                                    for ($i = 1; $i <= 12; $i++) {
+                                        $mmdate = $i<10?"0".$i:$i;
+                                        echo "<option value='$mmdate'>$mmdate</option>";
+                                    }
+                                    ?>
+                                </select> 
 
-                                    <select id="birth_date" name="date_birth" ng-model="date_birth" class="form-control bg_light w_full border_none bith_date_select"  required >
-                                        <option value="" >-DD-</option>
-                                        <?php
-                                        for ($i = 1; $i <= 31; $i++) {
-                                            $dddate = $i < 10 ? "0" . $i : $i;
-                                            echo "<option value='$dddate'>$dddate</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
+                                <select id="birth_date" name="date_birth" ng-model="date_birth" class="form-control bg_light w_full border_none bith_date_select"  required >
+                                    <option value="" >-DD-</option>
+                                     <?php
+                                    for ($i = 1; $i <= 31; $i++) {
+                                         $dddate = $i<10?"0".$i:$i;
+                                        echo "<option value='$dddate'>$dddate</option>";
+                                    }
+                                    ?>
+                                </select>
+                               </div>
 
                             </div>
                         </div>
@@ -169,13 +166,13 @@ $this->load->view('layout/header');
                             <div class="col-md-6">
                                 <label>Country *</label>
                                 <select name="country" id="country" class="form-control"  onchange="countryChange()" class="r_corners bg_light w_full border_none" style="width: 100%;height: 40px;padding: 5px;" required >
-                                    <option value="" >Select Country</option>
-                                    <?php
-                                    foreach ($countrylist as $key => $value) {
-                                        echo $country = ucwords(strtolower($value->country_name));
-                                        echo "<option value='$country'>$country</option>";
-                                    }
-                                    ?>
+                                   <option value="" >Select Country</option>
+                                            <?php
+                                            foreach ($countrylist as $key => $value) {
+                                                echo $country = ucwords(strtolower($value->country_name));
+                                                echo "<option value='$country'>$country</option>";
+                                            }
+                                            ?>
                                 </select>
                             </div>
                         </div> 
@@ -195,7 +192,7 @@ $this->load->view('layout/header');
 <!-- Login Registration Page Area End Here -->
 
 <!--angular controllers-->
-<script src="<?php echo base_url(); ?>assets/theme/angular/loginController.js"></script>
+<script src="<?php echo base_url(); ?>assets/theme/angular/productController.js"></script>
 
 
 <?php

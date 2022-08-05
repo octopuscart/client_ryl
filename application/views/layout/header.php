@@ -38,6 +38,8 @@
         <script src="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/theme/sweetalert2/sweetalert2.min.css">
 
+        <script src="<?php echo base_url(); ?>assets/theme/js/vendors/jquery/jquery.min.js"></script> 
+
 
         <!--angular js-->
         <script src="<?php echo base_url(); ?>assets/theme/angular/angular.min.js"></script>
@@ -74,9 +76,11 @@
                 $httpProvider.defaults.headers.common = {};
                 $httpProvider.defaults.headers.post = {};
             });
-            var baseurl = "<?php echo site_url(); ?>";
+            var baseurl = "<?php echo base_url(); ?>index.php/";
+            var adminurl = "<?php echo ADMINURL; ?>index.php/";
             var imageurlg = "<?php echo imageserver; ?>";
             var globlecurrency = "<?php echo globle_currency; ?>";
+
             var avaiblecredits = 0;</script>
 
         <style>
@@ -167,7 +171,7 @@
                                     </li>
 
                                     <li > 
-                                        <a href="<?php echo site_url("Shop/stylingTips"); ?>">Our Blog</a>
+                                        <a href="<?php echo site_url("offers"); ?>">Offers</a>
                                     </li>
                                     <li > 
                                         <a href="<?php echo site_url("Shop/appointment"); ?>">Appointment</a>
@@ -187,8 +191,9 @@
 
 
                                     <?php
-                                    if (0) {
+                                    if (1) {
                                         $session_data = $this->session->userdata('logged_in');
+
                                         if ($session_data) {
                                             ?>
                                             <li class="dropdown"> <a href="contact_us_1.html" class="dropdown-toggle" data-toggle="dropdown">Hi, <?php echo $session_data['first_name'] ? $session_data['first_name'] : 'User'; ?>! </a>
@@ -256,21 +261,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li> <a href="<?php echo site_url("Account/login"); ?>" ><i class="fa fa-lock"></i></a>
-                                        <div class="search-inside animated-4s fadeIn"> <i class="lnr lnr-cross search-close"></i>
-                                            <div class="search-overlay"></div>
-                                            <div class="position-center-center">
-                                                <div class="container">
-                                                    <div class="search">
-                                                        <form>
-                                                            <input type="search" placeholder="Type Your Search...">
-                                                            <button type="submit"><i class="lnr lnr-magnifier"></i></button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+
                                 </ul>
                             </div>
 

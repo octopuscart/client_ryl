@@ -37,16 +37,17 @@ $temp = array(
             <div class="accordion" style='padding: 10px 50px;'>
 
                 <?php
-                foreach ($temp as $key => $value) {
-                    ?>    
+                $index = 1;
+                foreach ($content_faq as $x => $x_value) {
+                    ?>
 
                     <dl class="accordion_item  r_corners wrapper m_bottom_5 tr_all" style='background: #ffffffcf;
                         border-radius: 5px;'>
-                        <dt class="accordion_link relative color_dark tr_all"><?php echo $key; ?>
-                       
+                        <dt class="accordion_link relative color_dark tr_all"> <?php echo $x_value["question"]; ?>
+
                         </dt>
                         <dd class="fw_light color_dark" style='background: #fff'>
-                            <?php echo $value; ?>
+                            <?php echo $x_value["answer"]; ?>
                         </dd>
                     </dl>
 
