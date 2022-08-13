@@ -1,5 +1,5 @@
 
-<div class="fontview_custom customization_block animated zoom "  ng-if="screencustom.view_type == 'front'" >
+<div class="fontview_custom customization_block animated zoom2 "  ng-if="screencustom.view_type == 'front'" >
 
     <?php
     if ($tuxedotype == '1') {
@@ -47,6 +47,12 @@
     <!--buttons-->
     <img src="<?php echo custome_image_server; ?>/jacket/buttons/{{selecteElements[fab.product_id]['Buttons'].folder}}/{{img}}.png" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].buttons2" >
 
+     <!--buttons-->
+    <img src="<?php echo custome_image_server; ?>/jacket/buttons/{{selecteElements[fab.product_id]['Buttons'].folder}}/{{img}}.png" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].buttons4"  style="margin-top: 57px;
+    margin-left: 2px;">
+
+ 
+    
     <!--jacket body right-->
     <!--<img src="<?php echo custome_image_server; ?>/jacket/output/overlay/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].overlay" >-->
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}//{{img}}" class="fixpos animated" ng-repeat="img in [selecteElements[fab.product_id]['Jacket Style'].right]" >
@@ -79,6 +85,9 @@
 
     <!--button holes-->
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].button_hole" >
+    <!--button holes-->
+    <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].button_hole2" style="margin-top: 57px;
+    margin-left: 2px;">
 
 
 
@@ -154,6 +163,11 @@
 
     <!--buttons-->
     <img src="<?php echo custome_image_server; ?>/jacket/buttons/{{selecteElements[fab.product_id]['Buttons'].folder}}/{{img}}.png" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].buttons" >
+          <!--buttons-->
+    <img src="<?php echo custome_image_server; ?>/jacket/buttons/{{selecteElements[fab.product_id]['Buttons'].folder}}/{{img}}.png" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].buttons3" ng-if="selecteElements[fab.product_id]['Jacket Style'].buttons3" style="margin-top: 60px;
+    margin-left: 7px;">
+
+    
 
     <img src="<?php echo custome_image_server; ?>/jacket/output/overlay/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Jacket Style'].overlay" >
 
@@ -162,7 +176,7 @@
 </div>   
 
 
-<div class="backview_custom customization_block zoom animated " ng-if="screencustom.view_type == 'back'">
+<div class="backview_custom customization_block zoom2 animated " ng-if="screencustom.view_type == 'back'">
 
 
 
@@ -175,7 +189,7 @@
 </div> 
 
 
-<div class="backview_custom customization_block zoom animated " ng-if="screencustom.view_type == 'pant'">
+<div class="backview_custom customization_block zoom2 animated " ng-if="screencustom.view_type == 'pant'">
     <!--<img src="<?php echo base_url(); ?>assets/images/pant_elements/base.png" class="fixpos animated">-->
     <!--font-->
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Number of Pleat'].elements">
@@ -210,7 +224,7 @@
 </div> 
 
 
-<div class="backview_custom customization_block zoom animated " ng-if="screencustom.view_type == 'pantback'">
+<div class="backview_custom customization_block zoom2 animated " ng-if="screencustom.view_type == 'pantback'">
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/pant_back_pocket0001.png" class="fixpos animated">
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/pant_back_waistband0001.png" class="fixpos animated">
     <img src="<?php echo custome_image_server; ?>/jacket/output/{{screencustom.productobj.folder}}/{{img}}" class="fixpos animated" ng-repeat="img in selecteElements[fab.product_id]['Number of Back Pocket'].elements">

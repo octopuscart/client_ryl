@@ -25,23 +25,22 @@ $this->load->view('layout/header');
     }
 </style>
 
-<div class="page-header" style="height: 160px">
-    <div class="container">
 
-        <h1 style="    color: black;
-            margin-bottom: 30px;
-            font-size: 30px;
-            text-shadow: 0px 0px;">My Designs</br>
-            <p style="font-size:15px;margin:10px auto;">Profile/ My Designs</p>
+<section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
+    <div class="position-center-center">
+        <div class="container">
+            <h4>Edit Measurement</h4>
 
-        </h1>
-
-        <!-- Breadcrumb -->
-
-
-
+            <!-- Breadcrumb -->
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Measurement</li>
+            </ol>
+        </div>
     </div>
-</div>
+</section>
+
+
 
 
 

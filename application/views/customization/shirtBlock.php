@@ -1,4 +1,4 @@
-<div class="fontview_custom customization_block animated zoom" ng-if="screencustom.view_type == 'front'">
+<div class="fontview_custom customization_block animated zoom2" ng-if="screencustom.view_type == 'front'">
     <div ng-if="selecteElements[screencustom.fabric]['Monogram Initial']">
         <div ng-if="selecteElements[fab.product_id]['Monogram'].title != 'Collar'">
             <div class="monogramtext_posistion
@@ -137,7 +137,7 @@
     <!--front button-->
     <div ng-switch="selecteElements[fab.product_id]['Button Hole Color Position'].ptype">
         <div ng-switch-when="1">
-            <img src="<?php echo custome_image_server; ?>/shirt/hole_thread/{{screencustom.productobj.folder}}/front_button_hole0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">
+            <!--<img src="<?php echo custome_image_server; ?>/shirt/hole_thread/{{screencustom.productobj.folder}}/front_button_hole0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">-->
             <img src="<?php echo custome_image_server; ?>/shirt/hole_thread/{{selecteElements[fab.product_id]['Button Hole Color'].color}}/front_button_hole0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">
         </div>
         <div ng-switch-when="2">
@@ -156,9 +156,7 @@
     <img src="<?php echo custome_image_server; ?>/shirt/buttons/{{selecteElements[fab.product_id]['Buttons'].button}}/button_front0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">
 
 
-    <img src="<?php echo custome_image_server; ?>/shirt/hole_thread/{{screencustom.productobj.folder}}/button_front_trd0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">
-    <img src="<?php echo custome_image_server; ?>/shirt/hole_thread/{{selecteElements[fab.product_id]['Button Thread Color'].color}}/button_front_trd0001.png" class="fixpos animated" ng-if="selecteElements[fab.product_id]['Front'].show_buttons == 'true'">
-
+   
 
 </div>
 

@@ -216,7 +216,7 @@ $image2 = "";
 
                     <div class="row" style="margin-bottom: 10px;">
                         <form action="" id="filterdata">
-                             <div class="col-md-3 ">
+                            <div class="col-md-3 ">
 
                                 <select name="filter" class="form-control" onchange="changeFilterData()"  style="    background: #f5f5f5;
                                         height: 45px;
@@ -252,10 +252,10 @@ $image2 = "";
                                 }
                                 ?>
                             </div>
-                           
+
                             <div class="col-md-4 ">
-                                
-            
+
+
                             </div>
                         </form>
                     </div>
@@ -267,7 +267,7 @@ $image2 = "";
                         <!-- Tesm Text -->
                         <section class="error-page text-center pad-t-b-130">
                             <div class="{{productResults.products.length?'container1':'container'}}"> 
-                             
+
                                 <!-- Heading -->
                                 <h1 style="font-size: 40px;text-align: center">Loading...</h1>
                             </div>
@@ -329,14 +329,27 @@ $image2 = "";
                                     }
                                     ?>
 
-                                    <article class=""> <img class="img-responsive" src="<?php echo $productimage1; ?>" alt="" > 
+                                    <article class=""> 
+                                        <?php
+                                        if ($custom_id == 5) {
+                                            ?>
+                                            <img class="img-responsive" src="<?php echo custome_image_server."jacket/tuxedofabric/tuxedoolverlay.png"; ?>" style="background-image:url(<?php echo $productimage1; ?>);    background-size: contain;" alt="" /> 
+                                            
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <img class="img-responsive" src="<?php echo $productimage1; ?>" alt="" /> 
+
+                                            <?php
+                                        }
+                                        ?>
                                         <!-- Sale -->
                                         <div class="item-sale" ng-if="product.is_sale == 'true'" class="onsaletag">Sale</div> 
                                         <div class="item-sale" ng-if="product.is_populer == 'true'" class="onpopulertag">HOT</div> 
 
                                         <div class="item-hover">
                                             <div class=" btn-group">
-                                                <a class="btn btn-primary" href="<?php echo site_url("Product/customizationRedirect/") ?><?php echo $custom_id; ?>/{{product.product_id}}" title="Add to cart">add to cart</a> 
+                                                <a class="btn btn-primary" href="<?php echo site_url("Product/customizationRedirect/") ?><?php echo $custom_id; ?>/{{product.product_id}}" title="Add to cart">Design Now</a> 
                                                 <button type="button" class="btn btn-primary" ng-click="askPriceSelection(product.product_id)" >Price Enq.
 
                                                 </button>

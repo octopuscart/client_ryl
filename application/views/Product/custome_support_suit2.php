@@ -134,12 +134,12 @@ $this->load->view('Product/custom_select_left');
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div ng-switch-when="Waistband Adjustment">
-                        
-                        <h5 class="customization_heading">{{k.title}} {{selecteElements[screencustom.fabric]["Waistband Adjustment"].wbtype}} {{selecteElements[screencustom.fabric]["Waistband"].wbtype}} </h5>
-                        <div class="col-md-4 col-xs-6 custome_element_col" ng-repeat="ele in data_list[k.title]" ng-if='selecteElements[screencustom.fabric]["Waistband"].wbtype ==ele.wbtype'>
+
+                        <h5 class="customization_heading">{{k.title}}  </h5>
+                        <div class="col-md-4 col-xs-6 custome_element_col" ng-repeat="ele in data_list[k.title]" ng-if='selecteElements[screencustom.fabric]["Waistband"].wbtype == ele.wbtype'>
                             <div class="item elementItem {{  ele.title == selecteElements[screencustom.fabric][k.title].title?'' :'noselected' }} "  ng-click='selectElement(k, ele)'>
                                 <div >
                                     <div class="elementStyle customization_box_element {{  ele.title == selecteElements[screencustom.fabric][k.title].title?'activestyle' :'noselected' }}" style="background:url('<?php echo base_url(); ?>assets/images/{{ele.image}}'); {{k.style_side}}" > </div>
@@ -150,7 +150,7 @@ $this->load->view('Product/custom_select_left');
                             </div>
                         </div>
                     </div>
-                    
+
                     <div ng-switch-when="Contrast First Button Hole">
                         <h5 class="customization_heading">{{k.title}}</h5>
                         <div class="col-md-2 col-xs-6 custome_element_col" ng-repeat="ele in data_list[k.title]" >
@@ -160,6 +160,24 @@ $this->load->view('Product/custom_select_left');
                                     <div class='customization_title'>
                                         {{ele.title}} 
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ng-switch-when="Remark">
+                        <h5 class="customization_heading">{{k.title}}</h5>
+                        <div class="col-md-12 customization_items customization_items_elements">
+                            <div class="row">
+                                <div style="clear:both "></div>
+                                <div class="row" style="margin: 0;opacity: {{selecteElements[screencustom.fabric]['summary'][k.title]=='No'?0.2:1 }};" >
+                                    <div class="col-md-12 monogram_init">
+                                        <h6>Max Char limit 150</h6>
+                                        <textarea type="text" maxlength="150" style="width: 100%;
+                                                  height: 150px;
+                                                  padding: 5px"  ng-model="selecteElements[screencustom.fabric]['summary']['Remark']" ></textarea>
+                                    </div>
+                                    <div style="clear:both "></div>
                                 </div>
                             </div>
                         </div>

@@ -685,3 +685,7 @@ span.badge {
     left: 0;
     z-index: 1050000;
 }
+
+.modal-header .close {
+    margin-top: -25px;
+}

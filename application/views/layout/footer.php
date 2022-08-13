@@ -18,7 +18,7 @@
 <footer class="footer-shop">
     <div class="container"> 
         <div class="row"> 
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <center>
 
                     <img src="<?php echo base_url(); ?>assets/images/spacial/turismlogo.png" class="spacial_text" style="height: 198px;
@@ -28,7 +28,7 @@
             </div>
 
             <!-- Contact -->
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <h4 >Contact Information!</h4>
                 <p><b><i class="fa fa-location-arrow"></i></b> Shop A, 2/F Entertainment Building,<br/>
                     30 Queen’s Road, Central, Hong Kong</p>
@@ -52,7 +52,7 @@
 
 
             <!-- Categories -->
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <h4>Information</h4>
                 <ul class="links-footer">
                     <li><a href="<?php echo site_url("Shop/offers"); ?>">Our Offers</a></li>
@@ -62,6 +62,28 @@
                     <li><a href="<?php echo site_url("Shop/faqs"); ?>">FAQs</a></li>
                 </ul>
             </div>
+            
+            
+             <!-- Categories -->
+            <div class="col-md-3">
+                <h4>Newsletter Subscribe!</h4>
+              
+                    <dl>
+                        <dd style="color:white;">Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</dd>
+                        <form action="<?php echo site_url("Shop/Subscribe");?>"  class=" row" method="post" >
+
+                            <div  class="col-sm-12" style="    margin-top: 10px;">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
+                            </div >
+                            <div  class="col-sm-12 text-left" style="    margin-top: 10px;">
+                                <button type="submit"  class="btn btn-inverse" name="sub" value="Subscribe" >Subscribe Now</button>
+                            </div >
+                        </form>
+
+                    </dl>
+            </div>
+            
+            
         </div>
     </div>
 </footer>
