@@ -184,7 +184,7 @@ $this->load->view('layout/header');
                                                 <a href="#size_standard" data-toggle="tab" class=" <?php echo $has_user ? '' : 'active'; ?>" role="tab" ng-click="slidedemostandard()">Standard Size</a>
                                             </li>
                                             <li><a href="#bank" data-toggle="tab" role="tab" ng-click="slidedemo('Custom Measurement')">Measure Your Body</a></li>
-                                            <li><a href="#cash" data-toggle="tab"  role="tab" ng-click="slidedemo('Mail-in Garments')">Mail-in Garments</a></li>
+                                            <li><a href="#cash" data-toggle="tab"  role="tab" ng-click="slidedemo('Mail Garment(s)')">Mail Garment(s)</a></li>
                                             <li><a href="#cheque" data-toggle="tab" role="tab"  ng-click="slidedemo('Recent Measurement')">For Existing Clients</a></li>
                                         </ul>
                                     </div>
@@ -242,10 +242,6 @@ $this->load->view('layout/header');
                                             }
                                             ?>
                                             <div class="tab-pane fade <?php echo $has_user ? '' : 'active in'; ?> in"  id="size_standard">
-
-
-
-
 
 
                                                 <div class="row">

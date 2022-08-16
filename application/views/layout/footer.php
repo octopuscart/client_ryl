@@ -55,35 +55,35 @@
             <div class="col-md-2">
                 <h4>Information</h4>
                 <ul class="links-footer">
-                    <li><a href="<?php echo site_url("Shop/offers"); ?>">Our Offers</a></li>
                     <li><a href="<?php echo site_url("Shop/aboutus"); ?>">About Us</a></li>
-                    <li><a href="<?php echo site_url("Shop/lookbook"); ?>">Look Book</a></li>
-                    <li><a href="<?php echo site_url("Shop/appointment"); ?>">Appointment</a></li>
                     <li><a href="<?php echo site_url("Shop/faqs"); ?>">FAQs</a></li>
+                    <li><a href="<?php echo site_url("terms-condition"); ?>" title="" style="color:white">Terms & Conditions</a></li>
+                    <li><a href="<?php echo site_url("privacy-policy"); ?>" title="" style="color:white">Privacy Policy</a></li>
+                    <li><a href="<?php echo site_url("return-policy"); ?>" title="" style="color:white">Return Policy</a></li>
                 </ul>
             </div>
-            
-            
-             <!-- Categories -->
+
+
+            <!-- Categories -->
             <div class="col-md-3">
                 <h4>Newsletter Subscribe!</h4>
-              
-                    <dl>
-                        <dd style="color:white;">Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</dd>
-                        <form action="<?php echo site_url("Shop/Subscribe");?>"  class=" row" method="post" >
 
-                            <div  class="col-sm-12" style="    margin-top: 10px;">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
-                            </div >
-                            <div  class="col-sm-12 text-left" style="    margin-top: 10px;">
-                                <button type="submit"  class="btn btn-inverse" name="sub" value="Subscribe" >Subscribe Now</button>
-                            </div >
-                        </form>
+                <dl>
+                    <dd style="color:white;">Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</dd>
+                    <form action="<?php echo site_url("Shop/Subscribe"); ?>"  class=" row" method="post" >
 
-                    </dl>
+                        <div  class="col-sm-12" style="    margin-top: 10px;">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
+                        </div >
+                        <div  class="col-sm-12 text-left" style="    margin-top: 10px;">
+                            <button type="submit"  class="btn btn-inverse" name="sub" value="Subscribe" >Subscribe Now</button>
+                        </div >
+                    </form>
+
+                </dl>
             </div>
-            
-            
+
+
         </div>
     </div>
 </footer>

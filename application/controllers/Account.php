@@ -356,6 +356,30 @@ class Account extends CI_Controller {
 
         $this->load->view('Account/orderList', $data);
     }
+    
+       function couponList() {
+        if ($this->user_id == 0) {
+            redirect('Account/login');
+        }
+        $this->db->where('user_id', $this->user_id);
+        $this->db->where('discount>', 0);
+        $query = $this->db->order_by("id desc")->get('user_order');
+        $orderlist = $query->result();
+
+        $orderslistr = [];
+        foreach ($orderlist as $key => $value) {
+
+            $this->db->order_by('id', 'desc');
+            $this->db->where('order_id', $value->id);
+            $query = $this->db->get('user_order_status');
+            $status = $query->row();
+            $value->status = $status ? $status->status : $value->status;
+            array_push($orderslistr, $value);
+        }
+        $data['orderslist'] = $orderslistr;
+
+        $this->load->view('Account/couponList', $data);
+    }
 
     //Address management
     function address() {

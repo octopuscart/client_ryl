@@ -148,7 +148,7 @@ $this->load->view('layout/header');
                                     <div class="coupon_form" ng-if="globleCartData.store_pick_check">
                                         You have selected pick order from store.
                                         <br/>
-                                        <button class="btn btn-danger removecouponbutton" ng-click="checkPickFromStore(false)">Click here</button> to cancel pick order from store
+                                        <button class="btn btn-danger btn-small-xs removecouponbutton" ng-click="checkPickFromStore(false)">Click here</button> to cancel pick order from store
 
                                     </div>
                                 </td>

@@ -24,12 +24,11 @@ class Product extends CI_Controller {
         $query = $this->db->get('custome_items');
         $customeitem = $query->row();
 
-
         if ($cat_id == 0) {
-           $cat_id = $customeitem->category_id;
+            $cat_id = $customeitem->category_id;
             $cattempid = $cat_id;
         }
-         $cat_id = $customeitem->category_id;
+        $cat_id = $customeitem->category_id;
 
         $categories = $this->Product_model->productListCategories($cat_id, $custom_id);
         $data["categorie_parent"] = $this->Product_model->getparent($cat_id);
@@ -39,8 +38,8 @@ class Product extends CI_Controller {
         $data["custom_id"] = $custom_id;
         $data["item_price"] = $customeitem->price;
         $data["cattempid"] = $cattempid;
-        
-                $categories = $this->Product_model->productListCategories($cat_id, $custom_id);
+
+        $categories = $this->Product_model->productListCategories($cat_id, $custom_id);
         $data["categorie_parent"] = $this->Product_model->getparent($cat_id);
         $data["categories"] = $categories;
         $data["category"] = $cat_id;
@@ -73,7 +72,6 @@ class Product extends CI_Controller {
             $categorie_parent = $this->Product_model->getparent($prodct_details['category_id']);
             $data["categorie_parent"] = $categorie_parent;
             $data["product_details"] = $prodct_details;
-
 
             $pquery = "SELECT pa.* FROM product_related as pr 
       join products as pa on pa.id = pr.related_product_id

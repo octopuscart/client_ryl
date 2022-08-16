@@ -1,10 +1,10 @@
 /* 
  Producrt list controllers
  */
-function  changeFilterData () {
-        $("#filterdata").submit();
+function  changeFilterData() {
+    $("#filterdata").submit();
 
-    }
+}
 App.controller('ProductController', function ($scope, $http, $timeout, $interval) {
 
     $scope.selectedProduct = {'product': {}, "filterdata": "Related"};
@@ -14,7 +14,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
     }
 
     $scope.askPriceSelected = function () {
-        var url = baseurl + "Api/priceAsk/" + custom_id;
+        var url = adminurl + "Api/priceAsk/" + custom_id;
         $http.get(url).then(function (rdata) {
             $scope.askpricedata = rdata.data;
 
@@ -23,7 +23,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
 
 
     $scope.removePriceData = function (product_id) {
-        var url = baseurl + "Api/priceAskDelete/" + custom_id + "/" + product_id;
+        var url = adminurl + "Api/priceAskDelete/" + custom_id + "/" + product_id;
         $http.get(url).then(function (rdata) {
 
             $scope.askPriceSelected();
@@ -39,7 +39,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
     }
 
     $scope.askPriceSelection = function (product_id) {
-        var url = baseurl + "Api/priceAsk";
+        var url = adminurl + "Api/priceAsk";
         var form = new FormData()
         form.append('product_id', product_id);
         form.append('item_id', custom_id);
@@ -48,7 +48,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
         })
     }
 
-    
+
 
 
     $scope.productResults = {};
@@ -57,8 +57,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
     $scope.pricerange = {'min': 0, 'max': 0};
     $scope.productProcess = {'state': 1, 'pagination': {'paginate': [1, 12], 'perpage': 12}, 'products': []};
 
-    $scope.getProducts = function (attrs) {
-        $scope.productProcess.state = 1;
+    $scope.getFilterList = function () {
         var argsk = [];
         for (i in $scope.attribute_checked) {
             var at = $scope.attribute_checked[i];
@@ -111,7 +110,12 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
             argsk.push(elempx);
             argsk.push(elempm);
         }
+        return argsk;
+    }
 
+    $scope.getProducts = function (attrs) {
+        $scope.productProcess.state = 1;
+        var argsk = $scope.getFilterList();
 
         var countdata = $(".info_text").text().split(" ")[1];
         if (Number(countdata[0])) {
@@ -128,16 +132,13 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
 
         var stargs = argsk.join("&");
 
-
-
-
-
-        var url = baseurl + "Api/productListApi/" + category_id + "/" + custom_id;
+        var url = adminurl + "Api/productListApi/" + category_id + "/" + custom_id;
 
         if (stargs) {
             url = url + "?" + stargs;
         }
 
+        console.log(url);
         $http.get(url).then(function (result) {
             if ($scope.productResults.products) {
                 $scope.productResults.products = result.data.products;
@@ -166,89 +167,33 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
             }
 
 
-//            $timeout(function () {
-//                $scope.productProcess.state = 2;
-//            }, 2000)
 
             $timeout(function () {
+               
+                    $('#paging_container1').pajinate({
+                        items_per_page: 12,
+                        num_page_links_to_display: 5,
+                    });
 
-                $('#paging_container1').pajinate({
-                    items_per_page: 12,
-                    num_page_links_to_display: 5,
-                });
+                    $scope.checkProduct();
 
-                $scope.checkProduct();
+                    $(".page_link").click(function () {
+                        $("html, body").animate({scrollTop: 0}, "slow")
+                    });
+                
 
-                $(".page_link").click(function () {
-                    $("html, body").animate({scrollTop: 0}, "slow")
-                })
-
-
-
-                //  Price Filter ( noUiSlider Plugin)
-//                $("#price-range").noUiSlider({
-//                    range: {
-//                        'min': [Number($scope.productResults.price.minprice)],
-//                        'max': [Number($scope.productResults.price.maxprice)]
-//                    },
-//                    start: [Number($scope.productResults.price.minprice), Number($scope.productResults.price.maxprice)],
-//                    connect: true,
-//                    serialization: {
-//                        lower: [
-//                            $.Link({
-//                                target: $("#price-min")
-//                            })
-//                        ],
-//                        upper: [
-//                            $.Link({
-//                                target: $("#price-max")
-//                            })
-//                        ],
-//                        format: {
-//                            // Set formatting
-//                            decimals: 2,
-//                            prefix: '$'
-//                        }
-//                    }
-//                })
-
-
-//                $("#amount").val("$" + $("#price-range").slider("values", 0) + " - $" + $("#price-range").slider("values", 1));
-            }, 1000)
+            }, 1000);
 
             $scope.init = 1;
         }, function () {
             $scope.productProcess.state = 0;
         });
     }
+
+
     $scope.getProducts2 = function (attrs) {
         $scope.productProcess.state = 1;
-        var argsk = [];
-        for (i in $scope.attribute_checked) {
-            var at = $scope.attribute_checked[i];
-            var argsv = [];
-            for (t in at) {
-                var tt = at[t];
-                argsv.push(tt)
-            }
-            var ak = "a" + i + "=" + argsv.join("-");
-            argsk.push(ak);
-        }
-        var pmm = $("#price-range-min").text().replace("$", "");
-        var pmx = $("#price-range-max").text().replace("$", "");
-
-        var elempm = "maxprice=" + pmx;
-        var elempx = "minprice=" + pmm;
-
-
-
-        if (pmm.trim()) {
-            $scope.pricerange.max = pmx;
-            $scope.pricerange.min = pmm;
-            argsk.push(elempx);
-            argsk.push(elempm);
-        }
-
+        var argsk = $scope.getFilterList();
 
         var countdata = $(".info_text").text().split(" ")[1];
         if (Number(countdata[0])) {
@@ -266,11 +211,7 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
         var stargs = argsk.join("&");
 
 
-
-
-
-        var url = baseurl + "Api/productListApi/" + category_id + "/" + custom_id;
-
+        var url = adminurl + "Api/productListApi/" + category_id + "/" + custom_id;
         if (stargs) {
             url = url + "?" + stargs;
         }
@@ -286,21 +227,13 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
 //                    $scope.productProcess.state = 2;
                 }
             }
-
             var totalcountdata = result.data.product_count;
-
-
 
             if ($scope.productResults.products.length) {
                 $scope.productProcess.state = 2;
             } else {
                 $scope.productProcess.state = 0;
             }
-
-
-
-
-
 
             $scope.init = 1;
         }, function () {
@@ -383,9 +316,6 @@ App.controller('ProductController', function ($scope, $http, $timeout, $interval
             countdata = [1, 12];
         }
         console.log(countdata);
-
-
-
     }
 
     $(document).on("click", ".page_link", function () {
@@ -459,7 +389,7 @@ App.controller('ProductSearchController', function ($scope, $http, $timeout, $in
 
 
 
-        var url = baseurl + "Api/productListSearchApi/" + keywords + "";
+        var url = adminurl + "Api/productListSearchApi/" + keywords + "";
 
         if (stargs) {
             url = url + "?" + stargs;

@@ -133,6 +133,7 @@ class CartGuest extends CI_Controller {
 
 //add New address
         if (isset($_POST['add_address'])) {
+            $address1 = $this->input->post('address1');
             $category_array = array(
                 'address1' => $this->input->post('address1'),
                 'address2' => $this->input->post('address2'),
@@ -150,6 +151,9 @@ class CartGuest extends CI_Controller {
                 'contact_no' => $this->input->post('contact_no'),
             );
             $this->session->set_userdata('customer_inforamtion', $customer);
+            if ($address1 == "Pick From Store") {
+                redirect('CartGuest/checkoutPayment');
+            }
             redirect('CartGuest/checkoutShipping');
         }
         $this->load->view('CartGuest/checkoutShipping', $data);
@@ -212,7 +216,7 @@ class CartGuest extends CI_Controller {
 
             $this->db->insert('user_order', $order_array);
             $last_id = $this->db->insert_id();
-            $orderno = "RF" . date('Y/m/d') . "/" . $last_id;
+            $orderno = "RT" . date('Y/m/d') . "/" . $last_id;
             $orderkey = md5($orderno);
             $this->db->set('order_no', $orderno);
             $this->db->set('order_key', $orderkey);

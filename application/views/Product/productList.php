@@ -56,7 +56,31 @@ $image2 = "";
         margin-left: -7px;
     }
 
+    .widget{
+        clear:both;
+        float: left;
+        width: 100%;
+      
+    }
+    .colorwidget {
+        display: inline-block;
+    }
 
+    .colorwidget label{
+        padding: 0px 5px;
+        float: left;
+        margin-right: 7px;
+        border: 1px solid #0000005e;
+        border: 1px solid #0000005e;
+        text-shadow: 0px 1px 4px #000;
+        margin-bottom: 0px;
+    }
+    .price_cut{
+        text-decoration: line-through;
+        font-size: 15px;
+
+        color: #0000006b;
+    }
 
 </style>
 
@@ -161,51 +185,61 @@ $image2 = "";
 
 
                         <!-- HEADING -->
-                        <!-- HEADING -->
-                        <div class="widget" style="margin-top: 30px;" >
+                        <div class="widget"  >
                             <div class="heading">
                                 <h6 class="widget-title font-alt">Filter by price</h6>
                             </div>
-                            <hr class="dotted">
+
                             <!-- PRICE -->
                             <div class="cost-price-content12">
                                 <label ng-repeat="price in productResults.priceList" style='font-weight: 500;width: 100%;'>
                                     <input type="checkbox" name='pricerange[]' class='pricefilter' value='{{price}}'> {{price|currency}}
+                                </label>
+                                <button class=" btn btn-link" style="    padding: 0;
+                                        margin-bottom: 20px;" ng-click="getProducts()" >FILTER</button> 
+                            </div>
+                        </div>
+
+                        <!-- HEADING -->
+                        <div class="widget"  >
+                            <div class="product_attr" ng-repeat="(attrk, attrv) in productResults.attributes" >
+                                <div class="heading" ng-if='attrv.widget == "color"' >
+                                    <h6>Color</h6>
+                                </div>
+                                <div class="cate" ng-if='attrv.widget == "color"' style="    list-style-type: none;">
+                                    <div class="colorwidget" ng-repeat="atv in attrv" ng-if='atv.product_count'>
+                                        <label style="font-weight: 500;background: {{atv.additional_value}};">
+
+                                            <i class="fa fa-check" ng-if="atv.checked" style="    position: absolute;
+                                               margin-top: 3px;
+                                               margin-left: 1px;
+                                               color: #fff;"></i>
+                                            <input type="checkbox"  ng-model="atv.checked" ng-click="attributeProductGet(atv)" style="opacity: 0;"> 
+
+                                            <!--{{atv.attribute_value}} ({{atv.product_count}})-->
+                                        </label>
+                                    <!--<a href="#."><input type="checkbox">{{atv.attribute_value}} <span>(32) </span></a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- HEADING -->
+                        <div class="widget" >
+                            <div class="heading"  >
+                                <h6 class="widget-title font-alt">Filter by Brand</h6>
+                            </div>
+
+                            <!-- PRICE -->
+                            <div class="cost-price-content12">
+                                <label ng-repeat="(brand, price) in productResults.brandList" style='font-weight: 500;width: 100%;'>
+                                    <input type="checkbox" name='pricerange[]' class='pricefilter' value='{{price}}'> {{brand}}
                                 </label>
                                 <button class="col-xs-3 btn btn-link" style="    padding: 0;
                                         margin-bottom: 20px;" ng-click="getProducts()" >FILTER</button> 
                             </div>
                         </div>
 
-
-                        <!-- HEADING -->
-
-                        <div class="product_attr" ng-repeat="(attrk, attrv) in productResults.attributes" >
-                            <div class="heading" ng-if='attrv.widget == "color"'>
-                                <h6>Color</h6>
-                                <hr class="dotted">
-                            </div>
-
-                            <!-- COLORE -->
-                            <ul class="cate" ng-if='attrv.widget == "color"'>
-                                <li ng-repeat="atv in attrv" ng-if='atv.product_count'>
-
-                                    <label style="font-weight: 500;background: {{atv.additional_value}};padding: 0px 5px;float: left;
-                                           margin-right: 5px;border: 1px solid #0000005e;border: 1px solid #0000005e;
-                                           text-shadow: 0px 1px 4px #000;">
-                                        <input type="checkbox"  ng-model="atv.checked" ng-click="attributeProductGet(atv)" style="opacity: 0;"> 
-
-                                        <i class="fa fa-check" ng-if="atv.checked" style="
-                                           margin-left: -14px;
-                                           color: #fff;"></i>
-                                        <!--{{atv.attribute_value}} ({{atv.product_count}})-->
-                                    </label>
-
-
-                                    <!--<a href="#."><input type="checkbox">{{atv.attribute_value}} <span>(32) </span></a>-->
-                                </li>
-                            </ul>
-                        </div>
 
                     </div>
                 </div>
@@ -333,8 +367,8 @@ $image2 = "";
                                         <?php
                                         if ($custom_id == 5) {
                                             ?>
-                                            <img class="img-responsive" src="<?php echo custome_image_server."jacket/tuxedofabric/tuxedoolverlay.png"; ?>" style="background-image:url(<?php echo $productimage1; ?>);    background-size: contain;" alt="" /> 
-                                            
+                                            <img class="img-responsive" src="<?php echo custome_image_server . "jacket/tuxedofabric/tuxedoolverlay.png"; ?>" style="background-image:url(<?php echo $productimage1; ?>);    background-size: contain;" alt="" /> 
+
                                             <?php
                                         } else {
                                             ?>
@@ -381,7 +415,8 @@ $image2 = "";
 
                                             <span class="colorblock" ></span>
                                         </p>
-                                        <span class="price">{{product.price|currency:"<?php echo globle_currency; ?> "}}</span> 
+
+                                        <span class="price"><span class="price_cut" ng-if="product.is_sale == 'true'">{{product.org_price|currency:"<?php echo globle_currency; ?> "}}</span>{{product.price|currency:"<?php echo globle_currency; ?> "}}</span> 
                                     </div>
                                 </article>
                             </div>
@@ -605,7 +640,7 @@ $image2 = "";
 
 
 <script>
-    var category_id = <?php echo $category; ?>;
+    var category_id = <?php echo $cattempid; ?>;
     var custom_id = <?php echo $custom_id; ?>;
     var searchdata = "<?php echo isset($_GET["search"]) ? ($_GET["search"] != '' ? $_GET["search"] : '0') : "0"; ?>";
     var filter = "<?php echo $appliedFilter; ?>";</script>
