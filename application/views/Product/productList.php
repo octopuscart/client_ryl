@@ -518,11 +518,12 @@ $image2 = "";
                                             </div>
 
                                         </div>
+                                        <br/>
                                         <input type="email" name="email" placeholder="Email*" class="form-control" required="">
-
+ <br/>
 
                                         <input type="tel" name="contact" placeholder="Contact No." class="form-control">
-
+ <br/>
 
                                         <button type="submit" name="priceenquiry" class="btn btn-danger">Submit</button>
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Add More</button>
