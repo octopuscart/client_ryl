@@ -31,6 +31,8 @@ $this->load->view('layout/header');
 
                         <h2 ><?php echo $value["code"]; ?><input style="display: none"  id="coupon<?php echo $value["id"]; ?>" value="<?php echo $value["code"]; ?>" /> <button class="btn btn-small-xs btn-default" onclick="copyCode('coupon<?php echo $value["id"]; ?>')">Copy now</button></h2>
                         <p style="font-size: 20px;"><?php echo $value["promotion_message"]; ?></p>
+                         <p style="font-size: 20px;">Valid Till:    <?php echo $value["valid_till"]; ?></p>
+                        
                         <hr/>
                     </div>
                     <?php

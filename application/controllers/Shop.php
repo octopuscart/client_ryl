@@ -111,7 +111,7 @@ class Shop extends CI_Controller {
     }
 
     public function offers() {
-        $query = $this->db->where("coupon_type", "All User")->get('coupon_conf');
+        $query = $this->db->where("valid_till >", date("Y-m-d"))->where("coupon_type", "All User")->get('coupon_conf');
         $data['coupons'] = $query ? $query->result_array() : array();
         $this->load->view('pages/offers', $data);
     }

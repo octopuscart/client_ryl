@@ -84,7 +84,7 @@ class Product extends CI_Controller {
                 $this->email->subject($subject);
                 $price_enquiry['item'] = $item;
                 $price_enquiry['name'] = $sendernameeq;
-                $price_enquiry['products'] = $productarray;
+                 $price_enquiry['products'] = $productarray;
                 $price_enquiry['subject'] = $subject;
 
                 $htmlsmessage = $this->load->view('Email/price_enquiry', $price_enquiry, true);
