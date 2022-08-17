@@ -755,43 +755,6 @@ function truncate($str, $len) {
 
 
 
-    <section class="new-main padding-top-30">
-        <div class="container"> 
-
-            <!-- Heading -->
-            <div class="heading-block">
-                <h3>Our Latest News</h3>
-
-            </div>
-
-            <!-- News Post -->
-            <div class="news-post">
-                <div class="row">
-                    <?php
-                    foreach ($stylebook as $key => $value) {
-                        ?>
-
-                        <div class="col-md-4">
-                            <article> 
-                                <img class="img-responsive" src="<?php echo base_url(); ?>assets/styletips/<?php echo $value['image']; ?>" alt="" >
-
-
-                                <a href="<?php echo site_url("styleTips/" . $value['id'] . "/" . $value['title']) ?>" class="news-tittle" style="    margin-top: 10px;
-                                   margin-bottom: 5px;"><?php echo truncate($value['title'], 100); ?></a>
-                                <p><?php echo truncate($value['description'], 200); ?></p>
-                                <a href="<?php echo site_url("styleTips/" . $value['id'] . "/" . $value['title']) ?>" class="red-more">Read More</a> </article>
-                        </div>
-
-                        <?php
-                    }
-                    ?>
-
-                </div>
-                <div class="text-center margin-top-50 animate fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;"> <a href="<?php echo site_url("Shop/stylingTips"); ?>" class="btn btn-inverse">VIEW MORE</a> </div>
-            </div>
-        </div>
-    </section>
-
 
 
     <div class="goldline3 " ></div>
