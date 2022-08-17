@@ -2,6 +2,7 @@
 $this->load->view('layout/header');
 ?>
 <!-- Inner Page Banner Area Start Here -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <section class="sub-bnr" data-stellar-background-ratio="0.5" style="margin-bottom: 10px;">
     <div class="position-center-center">
@@ -63,8 +64,8 @@ $this->load->view('layout/header');
                         <input type="password"  class="form-control"name="password" placeholder="Password *" required=""/>
                         <br/>
                         <button class="btn btn-default" name="signIn" type="submit" value="signIn">Login</button>
-                          <br/>
-                             <hr/>
+                        <br/>
+                        <hr/>
                         <p>Forgotten password? <a href="#" ng-click="requestPasswordReset()">Click here</a></p>
                         <br/>
                     </form>
@@ -183,6 +184,9 @@ $this->load->view('layout/header');
 
 
                         <br/>
+                        <div class="g-recaptcha" data-sitekey="6Lcld4QhAAAAALPKa_OL5OCG3yufK8_YAhS0uAYY"></div>
+                        <br/>
+
 
 
                         <button name = "registration" class="btn btn-default" type="submit" value="Login">Register</button>

@@ -752,11 +752,6 @@ function truncate($str, $len) {
 
 
 
-
-
-
-
-
     <div class="goldline3 " ></div>
     <div style="clear: both"></div>
     <!-- OUR SERVICES -->
@@ -802,28 +797,21 @@ function truncate($str, $len) {
             <!-- Slider -->
             <div class="slider-sec">
                 <div id="testi-slide"> 
-
-                    <!-- Slide -->
-                    <div class="item">
-                        <div class="tesi-text">
-                            <div class="avatar"> <img src="<?php echo base_url(); ?>assets/theme/images/comments-avatar-2.jpg" alt="" > </div>
-                            <p>Make it impossible in my life.
-                                Just one day to ready the nice suit to my father. 
-                                Complete the perfect black suit party.
-                                Many Thanks.</p>
-                            <h6>-  Catherine To -</h6>
-                            <span>Google Review</span> </div>
-                    </div>
-                    <div class="item">
-                        <div class="tesi-text">
-                            <div class="avatar"> <img src="<?php echo base_url(); ?>assets/theme/images/comments-avatar-2.jpg" alt="" > </div>
-                            <p>專業意見及優質的服務,令我選擇到心儀顏色的西裝
-
-
-                                Highly recommend! </p>
-                            <h6>- EDDY LAU -</h6>
-                            <span>Google Review</span> </div>
-                    </div>
+                    <?php foreach ($content_testimonial as $key => $value) {
+                        ?>
+                        <!-- Slide -->
+                        <div class="item">
+                            <div class="tesi-text">
+                                <div class="avatar"> <img src="<?php echo base_url(); ?>assets/theme/images/comments-avatar-2.jpg" alt="" > </div>
+                                <p><?php echo $value["review"]; ?></p>
+                                <h6>-  <?php echo $value["name"]; ?> -</h6>
+                                <span><?php
+                                    echo $value["source"];
+                                    ?></span> </div>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
