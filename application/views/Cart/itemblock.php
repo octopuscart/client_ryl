@@ -79,7 +79,7 @@
                         </span>  Payment Method
                         <span style="float: right; line-height: 29px;font-size: 12px;color: black;
     font-weight: bold;" class="ng-binding">
-                            PayPal
+                            Cash On Delivery
                         </span> 
                     </a>
                     <?php
