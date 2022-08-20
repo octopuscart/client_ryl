@@ -1499,15 +1499,8 @@ class CustomApi extends REST_Controller {
                     "elements" => ["pant_pocket_slanted.png"],
                     "image" => "pant_elements/pocket/pocket_slanted.png",
                     "show_buttons" => "true",
-                ), array(
-                    "status" => "0",
-                    "title" => "Straight Pocket",
-                    "elements" => ["pant_pocket_seam.png",],
-                    "customization_category_id" => "4",
-                    "image" => "pant_elements/pocket/pocket_seam.png",
-                    "show_buttons" => "true",
                 ),
-                array(
+                 array(
                     "status" => "0",
                     "title" => "Piped Pocket",
                     "elements" => ["pant_pocket_pipe.png",],
@@ -1515,7 +1508,15 @@ class CustomApi extends REST_Controller {
                     "customization_category_id" => "4",
                     "image" => "pant_elements/pocket/pocket_piped.png",
                     "show_buttons" => "true",
+                ),array(
+                    "status" => "0",
+                    "title" => "Seam Pocket",
+                    "elements" => ["pant_pocket_seam.png",],
+                    "customization_category_id" => "4",
+                    "image" => "pant_elements/pocket/pocket_seam.png",
+                    "show_buttons" => "true",
                 ),
+               
             ],
             "Number of Back Pocket" => [
                 array(
