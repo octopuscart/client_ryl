@@ -29,8 +29,12 @@ $this->load->view('layout/header');
                         <h3 class="text-transform-none letter-space-0">Our Location</h3>
                     </div>
                     <ul class="studio-loc padding-right-100">
-                        <li><i class="flaticon-route"></i> Shop A, 2/F Entertainment Building,<br/>
-                            30 Queen’s Road, Central, Hong Kong</li>
+                        <li><b><i class="fa fa-location-arrow"></i></b>Shop 11, 1/F Admiralty Center,<br/>
+18 Harcourt Road, Admiralty, Hong Kong</li>
+                
+               
+                   <li><b><i class="fa fa-location-arrow"></i></b>General Commercial Building,<br/>
+G/F, 162 Des Voeux Road, Central, Hong Kong</li>
                         <li><i class="flaticon-smartphone"></i> <a href="tel:85226559778" ><b><span class="fa fa-phone"></span></b> +(852) 2655 9778</a> <br>
                             <a href="tel:85226559768" ><span class="fa fa-fax"></span></b> +(852) 2655 9768</a></li>
                         <li><i class="flaticon-mail"></i> <a  href="mailto:lyra@royaltailor.hk">lyra@royaltailor.hk</a> <br>
