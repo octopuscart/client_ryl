@@ -30,8 +30,12 @@
             <!-- Contact -->
             <div class="col-md-3">
                 <h4 >Contact Information!</h4>
-                <p><b><i class="fa fa-location-arrow"></i></b> Shop A, 2/F Entertainment Building,<br/>
-                    30 Queen’s Road, Central, Hong Kong</p>
+                <p><b><i class="fa fa-location-arrow"></i></b>Shop 11, 1/F Admiralty Center,<br/>
+18 Harcourt Road, Admiralty, Hong Kong</p>
+                
+                <br/>
+                   <p><b><i class="fa fa-location-arrow"></i></b>General Commercial Building,<br/>
+G/F, 162 Des Voeux Road, Central, Hong Kong</p>
                 <p><b><i class="fa fa-phone"></i></b><a href="tel:85226559778" style="color:white"> +(852) 2655 9778</a></p>
                 <p><b><i class="fa fa-fax"></i></b><a href="tel:85226559768"  style="color:white"> +(852) 2655 9768</a></p>
                 <p><b><i class="fa fa-envelope"></i></b><a href="mailto:lyra@royaltailor.hk"  style="color:white">lyra@royaltailor.hk</a></p>
@@ -70,15 +74,13 @@
 
                 <dl>
                     <dd style="color:white;">Subscribe to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</dd>
-                    <form action="<?php echo site_url("Shop/Subscribe"); ?>"  class=" row" method="post" >
+                    <div  class=" row" method="post" >
 
-                        <div  class="col-sm-12" style="    margin-top: 10px;">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required="">
-                        </div >
+                        
                         <div  class="col-sm-12 text-left" style="    margin-top: 10px;">
-                            <button type="submit"  class="btn btn-inverse" name="sub" value="Subscribe" >Subscribe Now</button>
+                            <button type="button"  ng-click="requestNewsletterSubscription()" class="btn btn-inverse" name="sub" value="Subscribe" >Subscribe Now</button>
                         </div >
-                    </form>
+                    </div>
 
                 </dl>
             </div>

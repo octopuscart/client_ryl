@@ -56,8 +56,8 @@ class Shop extends CI_Controller {
             if ($this->input->post('email')) {
                 $this->email->set_newline("\r\n");
                 $this->email->from($this->input->post('email'), $sendername);
-                $this->email->to(email_bcc);
-//                $this->email->bcc(email_bcc);
+                $this->email->to($this->input->post('email'));
+                $this->email->bcc(email_bcc);
                 $subjectt = $this->input->post('subject');
                 $orderlog = array(
                     'log_type' => 'Enquiry',
@@ -124,6 +124,11 @@ class Shop extends CI_Controller {
         ];
 
         $data['timeslot'] = $timeslot;
+        $next7Days = [];
+        for ($i = 2; $i <= 9; $i++) {
+            $tempdate = array("date" => date('Y-m-d', strtotime("+$i day", strtotime(date('Y-m-d')))), "timing1" => "10:00 AM", "timing2" => "08:00 PM");
+            array_push($next7Days, $tempdate);
+        }
 
         $appointmentdetailslocal = [array(
         "type" => "local",
@@ -136,10 +141,7 @@ class Shop extends CI_Controller {
         "start_date" => "",
         "end_date" => "",
         "contact_no" => " +(852) 2655 9778",
-        "dates" => [
-            array("date" => "Mon-Fri", "timing1" => "10:00 AM", "timing2" => "08:00 PM"),
-            array("date" => "Sat-Sun", "timing1" => "11:00 AM", "timing2" => "07:00 PM"),
-        ]
+        "dates" => $next7Days
             ),];
 
         $data['appointmentdetailslocal'] = $appointmentdetailslocal;
@@ -349,7 +351,5 @@ class Shop extends CI_Controller {
             redirect("Shop/index");
         }
     }
-    
-    
 
 }
