@@ -93,6 +93,10 @@ class Shop extends CI_Controller {
     public function aboutus() {
         $this->load->view('pages/aboutus');
     }
+    
+    public function error404() {
+        $this->load->view('errors/error_404');
+    }
 
     public function faqs() {
         $query = $this->db->get('content_faq');
