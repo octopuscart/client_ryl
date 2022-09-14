@@ -136,7 +136,7 @@ class Shop extends CI_Controller {
         "country" => "Hong Kong",
         "city_state" => "Central",
         "hotel" => "SHOWROOM",
-        "address" => "Shop A, 2/F Entertainment Building,<br/>30 Queen's Road, Central, Hong Kong",
+        "address" => "Shop 11, 1/F Admiralty Center,18 Harcourt Road, Admiralty, Hong Kong",
         "days" => "",
         "start_date" => "",
         "end_date" => "",
