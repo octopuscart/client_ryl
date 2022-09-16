@@ -63,7 +63,7 @@
           background: rgb(225, 225, 225);
           font-family: sans-serif;">
         <div class="" style="padding:50px 0px">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff;padding: 0 20px">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff; ;padding: 0 20px">
                 <tr>
                     <td >
                         <center><img src="<?php echo site_mail_logo; ?> " style="margin: 10px;
@@ -85,8 +85,17 @@
                     <td colspan="6" style="font-size: 12px;">
 
                         <p>Hello <?php echo $name; ?>,</p><br/>
-                        E:<?php echo $email; ?><br/>
-                        T:<?php echo $contact ? $contact : '-'; ?>
+
+                        <table>
+                            <tr>
+                                <th>Email</th>
+                                <td><?php echo $email; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Contact No.</th>
+                                <td><?php echo $contact ? $contact : '-'; ?></td>
+                            </tr>
+                        </table>
 
                         <br/>
                         <p>Thank you for price enquiry for <?php echo $item; ?> fabric.</p>
@@ -109,9 +118,9 @@
                             }
                             ?>
                         </table>
-                         <?php echo EMAIL_FOOTER; ?>
+                        <?php echo EMAIL_FOOTER; ?>
                         </div>
-                       
+
 
                     </td>
                 </tr>

@@ -26,9 +26,10 @@
             .gn_table td{
                 padding:3px 0px;
             }
-            .gn_table th{
+            .carttable th{
                 padding:3px 0px;
                 text-align: left;
+                
 
             }
             .style_block{
@@ -63,14 +64,14 @@
           background: rgb(225, 225, 225);
           font-family: sans-serif;">
         <div class="" style="padding:50px 0px">
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style=" background: linear-gradient(to right, #FFD194, #D1913C);padding: 0 20px">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="700" style="background: #fff; ;padding: 0 20px">
                 <tr>
                     <td >
-                       
+
                         <center><img src="<?php echo site_mail_logo; ?> " style="margin: 10px;
                                      height: 50px;
                                      width: auto;"/><br/>
-                            <h4 style="color: white;"> <?php echo $web_enquiry['subject']; ?> </h4>
+                            <h4 style="color: black;"> <?php echo $web_enquiry['subject']; ?> </h4>
                         </center>
                     </td>
 
@@ -83,17 +84,36 @@
 
 
                 <tr>
-                    <td colspan="6" style="font-size: 12px;">
+                    <td style="font-size: 12px;">
 
-                        <p><?php echo $web_enquiry['first_name']; ?> <?php echo $web_enquiry['last_name']; ?>,</p><br/>
-                        E:<?php echo $web_enquiry['email']; ?><br/>
-                        T:<?php echo $web_enquiry['contact']; ?>
-                        <p><?php echo $web_enquiry['message']; ?></p> 
-                        <br/>
-                        <div style="height: 200px;">End<br />
-                            
-                        </div>
 
+                        <table border="1" style="width:100%;">
+                            <tr>
+                                <th>Name</th>
+                                <td><?php echo $web_enquiry['first_name']; ?> <?php echo $web_enquiry['last_name']; ?>,</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><?php echo $web_enquiry['email']; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Contact No.</th>
+                                <td><<?php echo $web_enquiry['contact']; ?></td>
+                            </tr>
+                              <tr>
+                                <th>Message</th>
+                                <td><<?php echo $web_enquiry['message']; ?></td>
+                            </tr>
+                        </table>
+
+                      
+
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <?php echo EMAIL_FOOTER; ?>
                     </td>
                 </tr>
 

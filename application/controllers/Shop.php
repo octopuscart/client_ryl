@@ -55,7 +55,7 @@ class Shop extends CI_Controller {
             $sendernameeq = $this->input->post('last_name') . " " . $this->input->post('first_name');
             if ($this->input->post('email')) {
                 $this->email->set_newline("\r\n");
-                $this->email->from($this->input->post('email'), $sendername);
+                $this->email->from($emailsender, $sendername);
                 $this->email->to($this->input->post('email'));
                 $this->email->bcc(email_bcc);
                 $subjectt = $this->input->post('subject');
@@ -73,15 +73,19 @@ class Shop extends CI_Controller {
                 $web_enquiry['web_enquiry'] = $web_enquiry;
 
                 $htmlsmessage = $this->load->view('Email/web_enquiry', $web_enquiry, true);
-                $this->email->message($htmlsmessage);
+                if (REPORT_MODE) {
+                    $this->email->message($htmlsmessage);
 
-                $this->email->print_debugger();
-                $send = $this->email->send();
-                if ($send) {
-                    echo json_encode("send");
+                    $this->email->print_debugger();
+                    $send = $this->email->send();
+                    if ($send) {
+                        echo json_encode("send");
+                    } else {
+                        $error = $this->email->print_debugger(array('headers'));
+                        echo json_encode($error);
+                    }
                 } else {
-                    $error = $this->email->print_debugger(array('headers'));
-                    echo json_encode($error);
+                    echo $htmlsmessage;
                 }
             }
 
@@ -93,7 +97,7 @@ class Shop extends CI_Controller {
     public function aboutus() {
         $this->load->view('pages/aboutus');
     }
-    
+
     public function error404() {
         $this->load->view('errors/error_404');
     }
@@ -353,6 +357,34 @@ class Shop extends CI_Controller {
             $this->load->view('pages/content', array("pageobj" => $pageobj));
         } else {
             redirect("Shop/index");
+        }
+    }
+
+    function testMail() {
+        $email = "octopuscartltd@gmail.com";
+        $emailsender = email_sender;
+        $sendername = email_sender_name;
+        $email_bcc = email_bcc;
+        $sendernameeq = $this->input->post('last_name') . " " . $this->input->post('first_name');
+        if ($email) {
+            $this->email->set_newline("\r\n");
+            $this->email->from($emailsender, $sendername);
+            $this->email->to($email);
+//            $this->email->bcc(email_bcc);
+
+            $subject = "Test mail from Sendgrid";
+            $this->email->subject($subject);
+
+//            $this->email->message("Test email body from sendgrid");
+//
+//            $this->email->print_debugger();
+//            $send = $this->email->send();
+//            if ($send) {
+//                echo json_encode("send");
+//            } else {
+//                $error = $this->email->print_debugger(array('headers'));
+//                echo json_encode($error);
+//            }
         }
     }
 
