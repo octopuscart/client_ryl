@@ -179,10 +179,11 @@ class CartGuest extends CI_Controller {
             $address = $user_address_details;
 
             if ($this->checklogin) {
-                $session_cart = $this->Product_model->cartDataCustome($this->user_id);
+                $session_cart = $this->Product_model->cartData($this->user_id);
             } else {
-                $session_cart = $this->Product_model->cartDataCustome();
+                $session_cart = $this->Product_model->cartData();
             }
+
 
             $sub_total_price = $session_cart['total_price'];
             $total_quantity = $session_cart['total_quantity'];
@@ -205,8 +206,11 @@ class CartGuest extends CI_Controller {
                 'order_date' => date('Y-m-d'),
                 'order_time' => date('H:i:s'),
                 'amount_in_word' => $this->Product_model->convert_num_word($sub_total_price),
-                'sub_total_price' => $sub_total_price,
-                'total_price' => $sub_total_price,
+                'sub_total_price' => $session_cart['sub_total_price'],
+                'total_price' => $session_cart['total_price'],
+                'coupon_code' => $session_cart['coupon_code'],
+                'discount' => $session_cart['discount'],
+                'shipping' => $session_cart['shipping_price'],
                 'total_quantity' => $total_quantity,
                 'status' => 'Order Confirmed',
                 'payment_mode' => $paymentmathod,
@@ -222,6 +226,7 @@ class CartGuest extends CI_Controller {
             $this->db->set('order_key', $orderkey);
             $this->db->where('id', $last_id);
             $this->db->update('user_order');
+            print_r($order_array);
 
             $this->Product_model->cartOperationCustomCopyOrder($last_id);
 
@@ -247,7 +252,6 @@ class CartGuest extends CI_Controller {
                 'remark' => "Order Confirmed By Using " . $paymentmathod . ",  Waiting For Payment",
             );
             $this->db->insert('user_order_status', $order_status_data);
-//                    $this->Product_model->order_to_vendor($last_id);
 
             $newdata = array(
                 'username' => '',
