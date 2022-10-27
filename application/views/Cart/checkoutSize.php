@@ -277,7 +277,7 @@ $this->load->view('layout/header');
                                                 </div>
                                             </div>
 
-                                             <!--start of custome measurement-->
+                                            <!--start of custome measurement-->
                                             <div class="tab-pane  text-center" id="bank">
                                                 <div class="mt-5 mb-5">
                                                     <p style="margin: 20px 0px 10px;">
@@ -301,8 +301,8 @@ $this->load->view('layout/header');
                                                     <b>Send to:</b>
                                                     <br/>
 
-                                                    Shop A, 2/F Entertainment Building,<br/>
-                                                    30 Queen’s Road, Central, Hong Kong
+                                                    Shop 11, 1/F Admiralty Center,<br/>
+                                                    18 Harcourt Road, Admiralty, Hong Kong
                                                     <br/>
                                                     <i class="fa fa-envelope"></i> sales@royaltailor.hk<br/>
                                                     <i class="fa fa-phone"></i>  +(852) 2655 9778 
@@ -455,6 +455,10 @@ $this->load->view('layout/footer', array('custom_item' => 0, 'custom_id' => 0));
     $http.get(baseurl + "Api/getUserPreMeasurementByItem_get/" + custom_items).then(function (rdata) {
     $scope.measurementPreData.userdata = rdata.data;
     });
+    $scope.slidedemo = function (mestitle) {
+
+    $scope.measurementstyle.title = mestitle;
+    };
 <?php
 if ($has_user) {
     ?>
