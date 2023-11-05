@@ -31,14 +31,14 @@
             <div class="col-md-3">
                 <h4 >Contact Information!</h4>
                 <p><b><i class="fa fa-location-arrow"></i></b>Shop 1, G/F Cheungs Building,<br/>
-                    3-1 Wing Lok Street, Sheung Wan, Hong Kong<br/>
+                    3-1 Wing Lok Street,<br/> Sheung Wan, Hong Kong<br/>
                     (Next to 168 Des Voeux Road)
                 </p>
                 <br/>
                 <p><b><i class="fa fa-location-arrow"></i></b>上環永樂街1-3號世瑛大廈地下1號舖，<br/>
                     (德輔道中168號旁)</p>
                 <p><b><i class="fa fa-phone"></i></b><a href="tel:85226559778" style="color:white"> +(852) 2655 9778</a></p>
-                <p><b><i class="fa fa-fax"></i></b><a href="tel:85227891566"  style="color:white"> +(852) 2789 1566</a></p>
+                <p><b><i class="fa fa-phone"></i></b><a href="tel:85227891566"  style="color:white"> +(852) 2789 1566</a></p>
                 <p><b><i class="fa fa-envelope"></i></b><a href="mailto:lyra@royaltailor.hk"  style="color:white">lyra@royaltailor.hk</a></p>
             </div>
 

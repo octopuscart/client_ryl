@@ -37,7 +37,7 @@ $this->load->view('layout/header');
                         <li><b><i class="fa fa-location-arrow"></i></b>上環永樂街1-3號世瑛大廈地下1號舖，<br/>
                             (德輔道中168號旁)</li>
                         <li><i class="flaticon-smartphone"></i> <a href="tel:85226559778" ><b><span class="fa fa-phone"></span></b> +(852) 2655 9778</a> <br>
-                            <a href="tel:85227891566" ><span class="fa fa-fax"></span></b> +(852) 2789 1566</a></li>
+                            <a href="tel:85227891566" ><span class="fa fa-phone"></span></b> +(852) 2789 1566</a></li>
                         <li><i class="flaticon-mail"></i> <a  href="mailto:lyra@royaltailor.hk">lyra@royaltailor.hk</a> <br>
                             <a  href="mailto:sales@royaltailor.hk">sales@royaltailor.hk</a></li>
                         <li><i class="fa fa-calendar-o"></i>
