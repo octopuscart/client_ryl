@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/wamp64/www/royaltailors/application/views/Email/order_mail.php</file>
-            <file>file:/D:/wamp64/www/royaltailors/application/views/Order/orderdetails.php</file>
+            <file>file:/D:/wamp64/www/royaltailors/application/views/Email/web_enquiry.php</file>
+            <file>file:/D:/wamp64/www/royaltailors/application/controllers/Shop.php</file>
+            <file>file:/D:/wamp64/www/royaltailors/application/views/layout/footer.php</file>
+            <file>file:/D:/wamp64/www/royaltailors/application/views/pages/contactus.php</file>
         </group>
     </open-files>
 </project-private>

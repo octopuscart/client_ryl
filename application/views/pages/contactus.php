@@ -29,14 +29,15 @@ $this->load->view('layout/header');
                         <h3 class="text-transform-none letter-space-0">Our Location</h3>
                     </div>
                     <ul class="studio-loc padding-right-100">
-                        <li><b><i class="fa fa-location-arrow"></i></b>Shop 11, 1/F Admiralty Center,<br/>
-18 Harcourt Road, Admiralty, Hong Kong</li>
-                
-               
-                   <li><b><i class="fa fa-location-arrow"></i></b>General Commercial Building,<br/>
-G/F, 162 Des Voeux Road, Central, Hong Kong</li>
+                        <li><b><i class="fa fa-location-arrow"></i></b></b>Shop 1, G/F Cheungs Building,<br/>
+                            3-1 Wing Lok Street, Sheung Wan, Hong Kong<br/>
+                            (Next to 168 Des Voeux Road)</li>
+
+
+                        <li><b><i class="fa fa-location-arrow"></i></b>上環永樂街1-3號世瑛大廈地下1號舖，<br/>
+                            (德輔道中168號旁)</li>
                         <li><i class="flaticon-smartphone"></i> <a href="tel:85226559778" ><b><span class="fa fa-phone"></span></b> +(852) 2655 9778</a> <br>
-                            <a href="tel:85226559768" ><span class="fa fa-fax"></span></b> +(852) 2655 9768</a></li>
+                            <a href="tel:85227891566" ><span class="fa fa-fax"></span></b> +(852) 2789 1566</a></li>
                         <li><i class="flaticon-mail"></i> <a  href="mailto:lyra@royaltailor.hk">lyra@royaltailor.hk</a> <br>
                             <a  href="mailto:sales@royaltailor.hk">sales@royaltailor.hk</a></li>
                         <li><i class="fa fa-calendar-o"></i>
